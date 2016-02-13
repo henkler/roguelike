@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import World from './world';
+import Viewport from './viewport';
 
 ReactDOM.render(
-  <Greeting name="World"/>,
+  <Viewport />,
   document.body
 );

@@ -1,7 +1,7 @@
 import Map from './map';
 
-const DEFAULT_MAP_WIDTH = 800;
-const DEFAULT_MAP_HEIGHT = 800;
+const DEFAULT_MAP_WIDTH = 80;
+const DEFAULT_MAP_HEIGHT = 80;
 
 const NUM_ENEMIES = 10;
 const NUM_POTIONS = 5;
