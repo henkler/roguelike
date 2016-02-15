@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from './tileComponent.scss';
+
 class TileComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -7,14 +9,13 @@ class TileComponent extends React.Component {
 
   render() {
     return (
-      <span>{this.props.type}</span>
+      <span className={styles.tile}>{this.props.tile.type}</span>
     );
   }
 }
 
 TileComponent.propTypes = {
-  type: React.PropTypes.number.isRequired,
-  entity: React.PropTypes.object
+  tile: React.PropTypes.object.isRequired
 };
 
 export default TileComponent;

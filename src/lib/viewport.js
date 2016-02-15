@@ -10,6 +10,8 @@ class Viewport {
     this.yMin = null;
     this.yMax = null;
 
+    console.log(this.width);
+
     this.update();
   }
 

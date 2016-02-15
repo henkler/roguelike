@@ -23,9 +23,9 @@ class MapComponent extends React.Component {
     for (var y = vp.yMin; y < vp.yMax; y++) {
       for (var x = vp.xMin; x < vp.xMax; x++) {
         var key = x + ':' + y;
-        var type = map.getTile(x,y).type;
+        var tile = map.getTile(x,y);
 
-        tiles.push(<TileComponent key={key} type={type} />);
+        tiles.push(<TileComponent key={key} tile={tile} />);
       }
 
       var key = y + '_row';

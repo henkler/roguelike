@@ -7,9 +7,9 @@ class UIComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    var game = new Game();
+    const game = new Game();
     this.state = {
-      game: game
+      game,
     };
   }
 
