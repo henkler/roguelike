@@ -7,6 +7,26 @@ class MapComponent extends React.Component {
     super(props);
   }
 
+  _renderMapTiles() {
+    let tiles = [];
+    const vp = this.props.viewport;
+    const map = this.props.map;
+
+    for (let y = vp.yMin; y <= vp.yMax; y++) {
+      for (let x = vp.xMin; x <= vp.xMax; x++) {
+        const key = `${x}:${y}`;
+        const tile = map.getTile(x, y);
+
+        tiles.push(<TileComponent key={key} tile={tile} />);
+      }
+
+      const key = `${y}_row`;
+      tiles.push(<br key={key} />);
+    }
+
+    return tiles;
+  }
+
   render() {
     return (
       <div>
@@ -14,31 +34,11 @@ class MapComponent extends React.Component {
       </div>
     );
   }
-
-  _renderMapTiles() {
-    var tiles = [];
-    var vp = this.props.viewport;
-    var map = this.props.map;
-
-    for (var y = vp.yMin; y < vp.yMax; y++) {
-      for (var x = vp.xMin; x < vp.xMax; x++) {
-        var key = x + ':' + y;
-        var tile = map.getTile(x,y);
-
-        tiles.push(<TileComponent key={key} tile={tile} />);
-      }
-
-      var key = y + '_row';
-      tiles.push(<br key={key} />);
-    }
-
-    return tiles;
-  }
 }
 
 MapComponent.propTypes = {
   map: React.PropTypes.object.isRequired,
-  viewport: React.PropTypes.object.isRequired
+  viewport: React.PropTypes.object.isRequired,
 };
 
 export default MapComponent;

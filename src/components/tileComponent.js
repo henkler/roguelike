@@ -1,6 +1,15 @@
 import React from 'react';
 
-import styles from './tileComponent.scss';
+const style = {
+  backgroundColor: 'black',
+  fontFamily: 'Courier New',
+  fontSize: 30,
+  color: 'white',
+  textAlign: 'center',
+  width: 35,
+  height: 35,
+  display: 'inline-block',
+};
 
 class TileComponent extends React.Component {
   constructor(props) {
@@ -9,13 +18,13 @@ class TileComponent extends React.Component {
 
   render() {
     return (
-      <span className={styles.tile}>{this.props.tile.type}</span>
+      <span style={style}>{this.props.tile.type}</span>
     );
   }
 }
 
 TileComponent.propTypes = {
-  tile: React.PropTypes.object.isRequired
+  tile: React.PropTypes.object.isRequired,
 };
 
 export default TileComponent;

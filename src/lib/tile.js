@@ -1,4 +1,4 @@
-class Tile  {
+class Tile {
   constructor(x, y, type) {
     this.x = x;
     this.y = y;
@@ -9,7 +9,7 @@ class Tile  {
 
 Tile.TYPE = {
   wall: 0,
-  open: 1
+  open: 1,
 };
 
 export default Tile;
