@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Viewport from './components/viewport';
+import UIComponent from './components/uiComponent';
 
 ReactDOM.render(
-  <Viewport />,
+  <UIComponent />,
   document.body
 );

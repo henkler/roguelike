@@ -33,10 +33,10 @@ class Map {
   }
 
   _randomFillMap() {
-    var tiles = new Array(this._width);
-    for (var i = 0; i < this._width; i++) {
-      tiles[i] = new Array(this._height);
-      for (var j = 0; j < this._height; j++) {
+    var tiles = new Array(this.width);
+    for (var i = 0; i < this.width; i++) {
+      tiles[i] = new Array(this.height);
+      for (var j = 0; j < this.height; j++) {
         // randomly determine if tile is blocked or not
         var isWall = Math.floor((Math.random() * 100) + 1) < GENERATOR_WALL_PERCENTAGE;
 
@@ -54,10 +54,10 @@ class Map {
   }
 
   _permuteMapIteration(r1_threshold, r2_threshold) {
-    var nextPermutation = new Array(this._width);
+    var nextPermutation = new Array(this.width);
 
-    for (var i = 0; i < this._width; i++) {
-      nextPermutation[i] = new Array(this._height);
+    for (var i = 0; i < this.width; i++) {
+      nextPermutation[i] = new Array(this.height);
       for (var j = 0; j < this._height; j++) {
         // get the number of wall tiles surrounding this tile for a radius of 1 and 2 squares
         var r1 = this._numWallsSurroundingTile(i, j, 1);
@@ -82,8 +82,8 @@ class Map {
     }
 
     // copy the new tile types into the map
-    for (var x = 0; x < this._width; x++) {
-      for (var y = 0; y < this._height; y++) {
+    for (var x = 0; x < this.width; x++) {
+      for (var y = 0; y < this.height; y++) {
         this._tiles[x][y].type = nextPermutation[x][y];
       }
     }
@@ -100,12 +100,12 @@ class Map {
   }
 
   _isBorder(x, y) {
-    return (x === 0 || y === 0 || x === (this._width - 1) || y === (this._height - 1));
+    return (x === 0 || y === 0 || x === (this.width - 1) || y === (this.height - 1));
   }
 
   _isWall(x, y) {
     // return wall for out of bounds
-    if (x < 0 || y < 0 || x >= this._width || y >= this._height) {
+    if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
       return true;
     }
     else {
@@ -131,12 +131,20 @@ class Map {
   }
 
   // public methods
+  getTile(x, y) {
+    if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
+      return null;
+    }
+
+    return this._tiles[x][y];
+  }
+
   getRandomEmptyTile() {
     var tile;
     do {
-      var x = Math.floor((Math.random() * this._width));
-      var y = Math.floor((Math.random() * this._height));
-      tile = this._tiles[x][y];
+      var x = Math.floor((Math.random() * this.width));
+      var y = Math.floor((Math.random() * this.height));
+      tile = this.getTile(x,y);
     }
     while(tile.entity !== null || tile.type !== Tile.TYPE.open);
 
@@ -145,8 +153,8 @@ class Map {
 
   toString() {
     var map_s = '';
-    for (var j = 0; j < this._height; j++) {
-      for (var i = 0; i < this._width; i++) {
+    for (var j = 0; j < this.height; j++) {
+      for (var i = 0; i < this.width; i++) {
         var type = this._tiles[i][j].type;
         var entity = this._tiles[i][j].entity;
         if (type === Tile.TYPE.wall) {
