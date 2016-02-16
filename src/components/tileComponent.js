@@ -1,15 +1,8 @@
 import React from 'react';
 
-const style = {
-  backgroundColor: 'black',
-  fontFamily: 'Courier New',
-  fontSize: 30,
-  color: 'white',
-  textAlign: 'center',
-  width: 35,
-  height: 35,
-  display: 'inline-block',
-};
+import Tile from '../lib/tile';
+
+require('./tileComponent.scss');
 
 class TileComponent extends React.Component {
   constructor(props) {
@@ -17,8 +10,16 @@ class TileComponent extends React.Component {
   }
 
   render() {
+    const type = this.props.tile.type;
+    let displayValue = '';
+
+    if (type === Tile.TYPE.wall) {
+      displayValue = '#';
+    } else {
+      displayValue = '.';
+    }
     return (
-      <span style={style}>{this.props.tile.type}</span>
+      <span className="tile">{displayValue}</span>
     );
   }
 }

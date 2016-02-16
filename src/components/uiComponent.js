@@ -34,7 +34,10 @@ class UIComponent extends React.Component {
   render() {
     return (
       <div>
-        <MapComponent map={this.state.game.world.map} viewport={this.state.game.viewport} />
+        <MapComponent
+          map={this.state.game.world.map}
+          viewport={this.state.game.viewport}
+        />
       </div>
     );
   }
