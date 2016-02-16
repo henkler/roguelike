@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Tile from '../lib/tile';
 
 require('./tileComponent.scss');
@@ -11,24 +10,27 @@ class TileComponent extends React.Component {
 
   render() {
     const tile = this.props.tile;
-    let displayValue = '';
+    let displayValue = null;
     let displayClass = 'tile';
 
-    if (tile.type === Tile.TYPE.wall) {
-      displayValue = '#';
+    if (!tile.explored) {
+      displayValue = <span>?</span>;
+      displayClass += ' tile-unexplored';
+    } else if (tile.type === Tile.TYPE.wall) {
+      displayValue = <span>#</span>;
       displayClass += ' tile-wall';
     } else {
       // display the entity on the tile if it exists
       if (tile.entity) {
-        displayValue = '@';
+        displayValue = <span>@</span>;
         displayClass += ' tile-player';
       } else {
-        displayValue = '.';
+        displayValue = <span>.</span>;
         displayClass += ' tile-open';
       }
     }
     return (
-      <span className={displayClass}>{displayValue}</span>
+      <div className={displayClass}>{displayValue}</div>
     );
   }
 }

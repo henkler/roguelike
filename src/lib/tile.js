@@ -3,6 +3,7 @@ class Tile {
     this.x = x;
     this.y = y;
     this.type = type;
+    this.explored = false;
     this.entity = null;
   }
 }

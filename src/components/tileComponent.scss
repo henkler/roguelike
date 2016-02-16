@@ -1,4 +1,5 @@
 .tile {
+  background-color: black;
   font-family: 'Courier New';
   font-size: 30;
   width: 35px;
@@ -6,8 +7,12 @@
   display: inline-block;
 }
 
+.tile-unexplored {
+  background-color: #1a1a1a;
+}
+
 .tile-wall {
-  color: white;
+  color: #cd853f;
 }
 
 .tile-open {
