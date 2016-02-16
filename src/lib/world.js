@@ -1,6 +1,7 @@
 import Map from './map';
 import Player from './player';
 import Enemy from './enemy';
+import PathFinder from './pathfinder';
 
 const DEFAULT_MAP_WIDTH = 30;
 const DEFAULT_MAP_HEIGHT = 30;
@@ -13,6 +14,8 @@ class World {
     this._map = new Map(DEFAULT_MAP_WIDTH, DEFAULT_MAP_HEIGHT);
     this._player = new Player(this);
 
+    this._pathfinder = new PathFinder(this);
+
     this._enemy = new Enemy(this);
   }
 
@@ -23,6 +26,10 @@ class World {
 
   get player() {
     return this._player;
+  }
+
+  get pathfinder() {
+    return this._pathfinder;
   }
 
   // public methods

@@ -1,4 +1,3 @@
-
 class Scheduler {
   constructor(world) {
     this._world = world;

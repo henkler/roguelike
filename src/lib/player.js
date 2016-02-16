@@ -17,6 +17,17 @@ class Player extends Entity {
     this._markTilesExplored();
   }
 
+  // returns true if the tile is visible to the player given their sight length
+  isTileVisible(tile) {
+    const xDist = this.x - tile.x;
+    const yDist = this.y - tile.y;
+
+    // compute the current distance of (x,y) from player
+    const distanceFromPlayer = Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+
+    return (distanceFromPlayer <= this.sight);
+  }
+
   _markTilesExplored() {
     const xMin = this.x - this.sight;
     const xMax = this.x + this.sight;
@@ -34,7 +45,7 @@ class Player extends Entity {
         const distanceFromPlayer = Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
 
         // this tile is further away than the players sight.  Get the next tile
-        if (distanceFromPlayer >= this.sight) {
+        if (distanceFromPlayer > this.sight) {
           continue;
         }
 
