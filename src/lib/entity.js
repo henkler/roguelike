@@ -1,8 +1,7 @@
-import Tile from './tile';
-
 class Entity {
-  constructor(world, type, tile) {
+  constructor(world, name, type, tile) {
     this._world = world;
+    this.name = name;
     this.type = type;
     this.tile = tile;
     this.tile.entity = this;
@@ -18,15 +17,29 @@ class Entity {
   }
 
   move(dx, dy) {
+    const newTile = this._getTileForMove(dx, dy);
+
+    // if we are trying to move to an invalid tile, return
+    if (!newTile) {
+      return;
+    }
+
+    if (newTile.isOpen) {
+      this._moveToTile(newTile);
+    }
+  }
+
+  _getTileForMove(dx, dy) {
     const newX = this.x + dx;
     const newY = this.y + dy;
-    const newTile = this._world.map.getTile(newX, newY);
+    return this._world.map.getTile(newX, newY);
+  }
 
-    if (newTile && newTile.type === Tile.TYPE.open && newTile.entity === null) {
-      this.tile.entity = null;
-      newTile.entity = this;
-      this.tile = newTile;
-    }
+  _moveToTile(tile) {
+    const newTile = tile;
+    this.tile.entity = null;
+    newTile.entity = this;
+    this.tile = newTile;
   }
 }
 

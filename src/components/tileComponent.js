@@ -1,5 +1,6 @@
 import React from 'react';
-import Tile from '../lib/tile';
+
+import Entity from '../lib/entity';
 
 require('./tileComponent.scss');
 
@@ -16,19 +17,27 @@ class TileComponent extends React.Component {
     if (!tile.explored) {
       displayValue = <span>?</span>;
       displayClass += ' tile-unexplored';
-    } else if (tile.type === Tile.TYPE.wall) {
+    } else if (tile.isWall) {
       displayValue = <span>#</span>;
       displayClass += ' tile-wall';
-    } else {
-      // display the entity on the tile if it exists
-      if (tile.entity) {
-        displayValue = <span>@</span>;
-        displayClass += ' tile-player';
-      } else {
-        displayValue = <span>.</span>;
-        displayClass += ' tile-open';
+    } else if (tile.hasEntity) {
+      switch (tile.entity.type) {
+        case Entity.TYPE.player:
+          displayValue = <span>@</span>;
+          displayClass += ' tile-player';
+          break;
+        case Entity.TYPE.enemy:
+          displayValue = <span>%</span>;
+          displayClass += ' tile-enemy';
+          break;
+        default:
+          break;
       }
+    } else {
+      displayValue = <span>.</span>;
+      displayClass += ' tile-open';
     }
+
     return (
       <div className={displayClass}>{displayValue}</div>
     );

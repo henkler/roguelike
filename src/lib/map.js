@@ -107,9 +107,8 @@ class Map {
     // return wall for out of bounds
     if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
       return true;
-    }
-    else {
-      return this._tiles[x][y].type === Tile.TYPE.wall;
+    } else {
+      return this._tiles[x][y].isWall;
     }
   }
 

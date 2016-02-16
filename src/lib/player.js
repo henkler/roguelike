@@ -1,11 +1,12 @@
 import Entity from './entity';
 
 const DEFAULT_PLAYER_SIGHT = 4;
+const DEFAULT_PLAYER_NAME = 'Hero';
 
 class Player extends Entity {
   constructor(world) {
     const emptyTile = world.map.getRandomEmptyTile();
-    super(world, Entity.TYPE.player, emptyTile);
+    super(world, DEFAULT_PLAYER_NAME, Entity.TYPE.player, emptyTile);
 
     this.sight = DEFAULT_PLAYER_SIGHT;
     this._markTilesExplored();
