@@ -1,7 +1,8 @@
 import Map from './map';
+import Player from './player';
 
-const DEFAULT_MAP_WIDTH = 80;
-const DEFAULT_MAP_HEIGHT = 80;
+const DEFAULT_MAP_WIDTH = 100;
+const DEFAULT_MAP_HEIGHT = 100;
 
 const NUM_ENEMIES = 10;
 const NUM_POTIONS = 5;
@@ -9,11 +10,22 @@ const NUM_POTIONS = 5;
 class World {
   constructor() {
     this._map = new Map(DEFAULT_MAP_WIDTH, DEFAULT_MAP_HEIGHT);
+    this._player = new Player(this);
   }
 
   // getters
   get map() {
     return this._map;
+  }
+
+  get player() {
+    return this._player;
+  }
+
+  // public methods
+
+  movePlayer(dx, dy) {
+    this._player.move(dx, dy);
   }
 
   // private methods

@@ -10,16 +10,25 @@ class TileComponent extends React.Component {
   }
 
   render() {
-    const type = this.props.tile.type;
+    const tile = this.props.tile;
     let displayValue = '';
+    let displayClass = 'tile';
 
-    if (type === Tile.TYPE.wall) {
+    if (tile.type === Tile.TYPE.wall) {
       displayValue = '#';
+      displayClass += ' tile-wall';
     } else {
-      displayValue = '.';
+      // display the entity on the tile if it exists
+      if (tile.entity) {
+        displayValue = '@';
+        displayClass += ' tile-player';
+      } else {
+        displayValue = '.';
+        displayClass += ' tile-open';
+      }
     }
     return (
-      <span className="tile">{displayValue}</span>
+      <span className={displayClass}>{displayValue}</span>
     );
   }
 }

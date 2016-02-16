@@ -2,11 +2,12 @@ const TILE_WIDTH = 35;
 const TILE_HEIGHT = 35;
 
 class Viewport {
-  constructor(game) {
-    this._game = game;
-    this._camera = game.camera;
-    this.mapWidth = this._game.world.map.width;
-    this.mapHeight = this._game.world.map.height;
+  constructor(world, camera) {
+    this._world = world;
+    this._camera = camera;
+    this.mapWidth = this._world.map.width;
+    this.mapHeight = this._world.map.height;
+
     this.width = null;
     this.height = null;
 

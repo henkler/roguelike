@@ -2,8 +2,8 @@ import Tile from './tile';
 import Entity from './entity';
 
 const GENERATOR_WALL_PERCENTAGE = 40;
-const GENERATOR_ITERATIONS = 8;
-const GENERATOR_SMOOTHING_ITERATIONS = 0;
+const GENERATOR_ITERATIONS = 4;
+const GENERATOR_SMOOTHING_ITERATIONS = 3;
 
 class Map {
   constructor(width, height) {
@@ -95,7 +95,7 @@ class Map {
     }
 
     for (var j = 0; j < GENERATOR_SMOOTHING_ITERATIONS; j++) {
-      this._permuteMapIterations(5, null);
+      this._permuteMapIteration(5, null);
     }
   }
 

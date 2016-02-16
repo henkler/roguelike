@@ -1,8 +1,15 @@
 class Camera {
-  constructor(game, x, y) {
-    this.game = game;
-    this.x = x;
-    this.y = y;
+  constructor(followEntity) {
+    this._entity = followEntity;
+  }
+
+  // getters and setters
+  get x() {
+    return this._entity.x;
+  }
+
+  get y() {
+    return this._entity.y;
   }
 }
 
