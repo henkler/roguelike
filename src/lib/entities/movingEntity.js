@@ -1,13 +1,15 @@
 import Entity from './entity';
 
 class MovingEntity extends Entity {
-  constructor(game, name, type, tile, initialHealth, initialRange) {
+  constructor(game, name, type, tile, initialRange, level) {
     super(game, name, type, tile);
 
     this.startX = tile.x;
     this.startY = tile.y;
     this.range = initialRange;
-    this.health = initialHealth;
+    this.level = level;
+    this.health = 0;
+    this.xp = 0;
   }
 
   move(dx, dy) {
@@ -20,6 +22,39 @@ class MovingEntity extends Entity {
 
     if (newTile.isOpen) {
       this._moveToTile(newTile);
+    }
+  }
+
+  attack(entity, damage) {
+    console.log(`${this.name} attacks ${entity.name}${this.weapon ? ' with ' + this.weapon.name : ''}`);
+    entity.handleAttack(this, damage);
+  }
+
+  handleAttack(entity, damage) {
+    console.log(`${this.name} receives ${damage} points of damage from ${entity.name}`);
+    this._takeDamage(damage);
+  }
+
+  // method stub
+  die() {
+    return;
+  }
+
+  get isDead() {
+    return this.health === 0;
+  }
+
+  _takeDamage(damage) {
+    if (damage > this.health) {
+      this.health = 0;
+    } else {
+      this.health -= damage;
+    }
+
+    if (this.isDead) {
+      this.die();
+    } else {
+      console.log(`${this.name} has ${this.health} hit points remaining`);
     }
   }
 

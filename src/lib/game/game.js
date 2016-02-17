@@ -17,7 +17,7 @@ class World {
 
     this._pathfinder = new PathFinder(this);
 
-    this._enemy = new Enemy(this);
+    this._enemy = new Enemy(this, 1);
 
     this._weapon = new Weapon(this, 'Claw of Death', 30);
   }

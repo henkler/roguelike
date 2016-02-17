@@ -6,7 +6,7 @@ class Tile {
     this._y = y;
     this._type = type;
     this._entity = null;
-    this._explored = false;
+    this._explored = true;
   }
 
   // getters

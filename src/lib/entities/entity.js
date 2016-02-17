@@ -16,6 +16,18 @@ class Entity {
     return this.tile.y;
   }
 
+  get isPlayer() {
+    return this.type === Entity.TYPE.player;
+  }
+
+  get isEnemy() {
+    return this.type === Entity.TYPE.enemy;
+  }
+
+  get isWeapon() {
+    return this.type === Entity.TYPE.weapon;
+  }
+
   // method stub
   _interactWithEntity(entity) {
     return false;

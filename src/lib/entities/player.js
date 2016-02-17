@@ -9,7 +9,16 @@ const INITIAL_PLAYER_HEALTH = 100;
 class Player extends MovingEntity {
   constructor(game) {
     const emptyTile = game.map.getRandomEmptyTile();
-    super(game, DEFAULT_PLAYER_NAME, Entity.TYPE.player, emptyTile, INITIAL_PLAYER_HEALTH, INITIAL_PLAYER_SIGHT);
+    super(game,
+      DEFAULT_PLAYER_NAME,
+      Entity.TYPE.player,
+      emptyTile,
+      INITIAL_PLAYER_SIGHT,
+      1);
+
+    this.xp = 0;
+    this.health = INITIAL_PLAYER_HEALTH;
+    this.weapon = null;
 
     this._markTilesExplored();
   }
@@ -19,8 +28,17 @@ class Player extends MovingEntity {
     this._markTilesExplored();
   }
 
-  attack(entity) {
-    console.log("attacking");
+  die() {
+    console.log("I'm dying");
+  }
+
+  pickupWeapon(newWeapon) {
+    if (!this.weapon || newWeapon.damage > this.weapon.damage) {
+      this.weapon = newWeapon;
+      console.log(`Equipped ${newWeapon.name} with base damage ${newWeapon.damage}`);
+    } else {
+      console.log(`The ${newWeapon.name} has less damage than your current weapon.  You hurl it into the bushes`);
+    }
   }
 
   // returns true if the tile is visible to the player given their sight length
@@ -34,12 +52,23 @@ class Player extends MovingEntity {
     return (distanceFromPlayer <= this.range);
   }
 
+  get attackDamage() {
+    if (this.weapon) {
+      return this.weapon.damage * this.level;
+    }
+    return this.level;
+  }
+
+
   _interactWithEntity(entity) {
-    if (entity.type === Entity.TYPE.weapon) {
-      console.log("picked up weapon");
+    if (entity.isEnemy) {
+      const damage = this.attackDamage;
+      this.attack(entity, damage);
+      // we can move through the enemy if it is dead
+      return entity.isDead;
+    } else if (entity.isWeapon) {
+      this.pickupWeapon(entity);
       return true;
-    } else {
-      console.log("interacting");
     }
 
     return false;

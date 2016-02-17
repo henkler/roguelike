@@ -3,12 +3,23 @@ import Entity from './entity';
 
 const DEFAULT_ENEMY_NAME = 'Mireluk';
 const DEFAULT_ENEMY_RANGE = 5;
-const DEFAULT_ENEMY_HEALTH = 20;
+const ENEMY_BASE_HEALTH = 10;
+const ENEMY_BASE_XP = 20;
+const ENEMY_BASE_MAX_DAMAGE = 5;
 
 class Enemy extends MovingEntity {
-  constructor(game) {
+  constructor(game, level) {
     const emptyTile = game.map.getRandomEmptyTile();
-    super(game, DEFAULT_ENEMY_NAME, Entity.TYPE.enemy, emptyTile, DEFAULT_ENEMY_HEALTH, DEFAULT_ENEMY_RANGE);
+    super(game,
+      DEFAULT_ENEMY_NAME,
+      Entity.TYPE.enemy,
+      emptyTile,
+      DEFAULT_ENEMY_RANGE,
+      level);
+
+    this.maxDamage = ENEMY_BASE_MAX_DAMAGE * this.level;
+    this.xp = ENEMY_BASE_XP * this.level;
+    this.health = ENEMY_BASE_HEALTH * this.level;
   }
 
   move() {
@@ -20,8 +31,19 @@ class Enemy extends MovingEntity {
     }
   }
 
+  die() {
+    console.log("Enemy should die");
+  }
+
+  get attackDamage() {
+    return Math.floor(Math.random() * this.maxDamage) + 1;
+  }
+
   _interactWithEntity(entity) {
-    console.log("Enemy interaction");
+    if (entity.isPlayer) {
+      const damage = this.attackDamage;
+      this.attack(entity, damage);
+    }
     return false;
   }
 
