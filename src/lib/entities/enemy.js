@@ -4,9 +4,9 @@ const DEFAULT_ENEMY_NAME = 'Mireluk';
 const DEFAULT_ENEMY_RANGE = 5;
 
 class Enemy extends Entity {
-  constructor(world) {
-    const emptyTile = world.map.getRandomEmptyTile();
-    super(world, DEFAULT_ENEMY_NAME, Entity.TYPE.enemy, emptyTile);
+  constructor(game) {
+    const emptyTile = game.map.getRandomEmptyTile();
+    super(game, DEFAULT_ENEMY_NAME, Entity.TYPE.enemy, emptyTile);
 
     this.startX = emptyTile.x;
     this.startY = emptyTile.y;
@@ -55,6 +55,7 @@ class Enemy extends Entity {
 
   _moveRandom() {
     let openTiles = [];
+
     for (let x = this.x - 1; x <= this.x + 1; x++) {
       for (let y = this.y - 1; y <= this.y + 1; y++) {
         if (x === this.x && y === this.y) {

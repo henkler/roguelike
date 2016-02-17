@@ -4,9 +4,9 @@ const DEFAULT_PLAYER_SIGHT = 4;
 const DEFAULT_PLAYER_NAME = 'Hero';
 
 class Player extends Entity {
-  constructor(world) {
-    const emptyTile = world.map.getRandomEmptyTile();
-    super(world, DEFAULT_PLAYER_NAME, Entity.TYPE.player, emptyTile);
+  constructor(game) {
+    const emptyTile = game.map.getRandomEmptyTile();
+    super(game, DEFAULT_PLAYER_NAME, Entity.TYPE.player, emptyTile);
 
     this.sight = DEFAULT_PLAYER_SIGHT;
     this._markTilesExplored();
@@ -33,7 +33,7 @@ class Player extends Entity {
     const xMax = this.x + this.sight;
     const yMin = this.y - this.sight;
     const yMax = this.y + this.sight;
-    const map = this._world.map;
+    const map = this._game.map;
 
     // iterate in a box around the player
     for (let x = xMin; x <= xMax; x++) {

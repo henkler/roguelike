@@ -33,47 +33,45 @@ class Map {
   }
 
   _randomFillMap() {
-    var tiles = new Array(this.width);
-    for (var i = 0; i < this.width; i++) {
+    let tiles = new Array(this.width);
+
+    for (let i = 0; i < this.width; i++) {
       tiles[i] = new Array(this.height);
-      for (var j = 0; j < this.height; j++) {
+      for (let j = 0; j < this.height; j++) {
         // randomly determine if tile is blocked or not
-        var isWall = Math.floor((Math.random() * 100) + 1) < GENERATOR_WALL_PERCENTAGE;
+        let isWall = Math.floor((Math.random() * 100) + 1) < GENERATOR_WALL_PERCENTAGE;
 
         // map border is always a wall
         if (this._isBorder(i, j)) {
           isWall = true;
         }
 
-        var tile = new Tile(i, j, isWall ? Tile.TYPE.wall : Tile.TYPE.open);
-        tiles[i][j] = tile;
+        tiles[i][j] = new Tile(i, j, isWall ? Tile.TYPE.wall : Tile.TYPE.open);
       }
     }
 
     this._tiles = tiles;
   }
 
-  _permuteMapIteration(r1_threshold, r2_threshold) {
-    var nextPermutation = new Array(this.width);
+  _permuteMapIteration(r1Threshold, r2Threshold) {
+    let nextPermutation = new Array(this.width);
 
-    for (var i = 0; i < this.width; i++) {
+    for (let i = 0; i < this.width; i++) {
       nextPermutation[i] = new Array(this.height);
-      for (var j = 0; j < this._height; j++) {
+      for (let j = 0; j < this._height; j++) {
         // get the number of wall tiles surrounding this tile for a radius of 1 and 2 squares
-        var r1 = this._numWallsSurroundingTile(i, j, 1);
-        var r2 = this._numWallsSurroundingTile(i, j, 2);
+        const r1 = this._numWallsSurroundingTile(i, j, 1);
+        const r2 = this._numWallsSurroundingTile(i, j, 2);
 
-        var tileType;
+        let tileType;
 
         // if the walls surrounding the tile is bigger than the radius of 1 threshold, make a wall
-        if (r1 >= r1_threshold) {
+        if (r1 >= r1Threshold) {
           tileType = Tile.TYPE.wall;
-        }
-        // if the walls surrounding the tile is less than the radius of 2 threshold, make a wall
-        else if (r2_threshold && r2 <= r2_threshold) {
+        } else if (r2Threshold && r2 <= r2Threshold) {
+          // if the walls surrounding the tile is less than the radius of 2 threshold, make a wall
           tileType = Tile.TYPE.wall;
-        }
-        else {
+        } else {
           tileType = Tile.TYPE.open;
         }
 
@@ -82,19 +80,19 @@ class Map {
     }
 
     // copy the new tile types into the map
-    for (var x = 0; x < this.width; x++) {
-      for (var y = 0; y < this.height; y++) {
+    for (let x = 0; x < this.width; x++) {
+      for (let y = 0; y < this.height; y++) {
         this._tiles[x][y].type = nextPermutation[x][y];
       }
     }
   }
 
   _permuteMap() {
-    for (var i = 0; i < GENERATOR_ITERATIONS; i++) {
+    for (let i = 0; i < GENERATOR_ITERATIONS; i++) {
       this._permuteMapIteration(5, 2);
     }
 
-    for (var j = 0; j < GENERATOR_SMOOTHING_ITERATIONS; j++) {
+    for (let j = 0; j < GENERATOR_SMOOTHING_ITERATIONS; j++) {
       this._permuteMapIteration(5, null);
     }
   }
@@ -107,20 +105,20 @@ class Map {
     // return wall for out of bounds
     if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
       return true;
-    } else {
-      return this._tiles[x][y].isWall;
     }
+
+    return this._tiles[x][y].isWall;
   }
 
   _numWallsSurroundingTile(x, y, surroundSize) {
-    var wallCount = 0;
+    let wallCount = 0;
 
-    for (var i = x - surroundSize; i <= x + surroundSize; i++) {
-      for (var j = y - surroundSize; j <= y + surroundSize; j++) {
+    for (let i = x - surroundSize; i <= x + surroundSize; i++) {
+      for (let j = y - surroundSize; j <= y + surroundSize; j++) {
         if (i === x && j === y) {
           continue;
         }
-        if (this._isWall(i,j)) {
+        if (this._isWall(i, j)) {
           wallCount++;
         }
       }
@@ -139,56 +137,50 @@ class Map {
   }
 
   getRandomEmptyTile() {
-    var tile;
+    let tile;
     do {
-      var x = Math.floor((Math.random() * this.width));
-      var y = Math.floor((Math.random() * this.height));
-      tile = this.getTile(x,y);
+      const x = Math.floor((Math.random() * this.width));
+      const y = Math.floor((Math.random() * this.height));
+      tile = this.getTile(x, y);
     }
-    while(tile.entity !== null || tile.type !== Tile.TYPE.open);
+    while (tile.entity !== null || tile.type !== Tile.TYPE.open);
 
     return tile;
   }
 
   toString() {
-    var map_s = '';
-    for (var j = 0; j < this.height; j++) {
-      for (var i = 0; i < this.width; i++) {
-        var type = this._tiles[i][j].type;
-        var entity = this._tiles[i][j].entity;
+    let mapString = '';
+    for (let j = 0; j < this.height; j++) {
+      for (let i = 0; i < this.width; i++) {
+        const type = this._tiles[i][j].type;
+        const entity = this._tiles[i][j].entity;
         if (type === Tile.TYPE.wall) {
-          map_s += '#';
+          mapString += '#';
         }
         if (type === Tile.TYPE.open) {
           if (entity) {
             if (entity.type === Entity.TYPE.player) {
-              map_s += '@';
+              mapString += '@';
+            } else if (entity.type === Entity.TYPE.enemy) {
+              mapString += '?';
+            } else if (entity.type === Entity.TYPE.boss) {
+              mapString += '!';
+            } else if (entity.type === Entity.TYPE.weapon) {
+              mapString += '$';
+            } else if (entity.type === Entity.TYPE.potion) {
+              mapString += '*';
+            } else {
+              mapString += 'x';
             }
-            else if (entity.type === Entity.TYPE.enemy) {
-              map_s += '?';
-            }
-            else if (entity.type === Entity.TYPE.boss) {
-              map_s += '!';
-            }
-            else if (entity.type === Entity.TYPE.weapon) {
-              map_s += '$';
-            }
-            else if (entity.type === Entity.TYPE.potion) {
-              map_s += '*';
-            }
-            else {
-              map_s += 'x';
-            }
-          }
-          else {
-            map_s += '.';
+          } else {
+            mapString += '.';
           }
         }
       }
-      map_s += '\n';
+      mapString += '\n';
     }
 
-    return map_s;
+    return mapString;
   }
 }
 

@@ -1,6 +1,6 @@
 class Entity {
-  constructor(world, name, type, tile) {
-    this._world = world;
+  constructor(game, name, type, tile) {
+    this._game = game;
     this.name = name;
     this.type = type;
     this.tile = tile;
@@ -32,7 +32,7 @@ class Entity {
   _getTileForMove(dx, dy) {
     const newX = this.x + dx;
     const newY = this.y + dy;
-    return this._world.map.getTile(newX, newY);
+    return this._game.map.getTile(newX, newY);
   }
 
   _moveToTile(tile) {
