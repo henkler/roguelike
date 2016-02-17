@@ -7,7 +7,7 @@ class Entity {
     this.tile.entity = this;
   }
 
-  // getters and setters
+  // getters
   get x() {
     return this.tile.x;
   }
@@ -16,30 +16,22 @@ class Entity {
     return this.tile.y;
   }
 
-  move(dx, dy) {
-    const newTile = this._getTileForMove(dx, dy);
-
-    // if we are trying to move to an invalid tile, return
-    if (!newTile) {
-      return;
-    }
-
-    if (newTile.isOpen) {
-      this._moveToTile(newTile);
-    }
+  // method stub
+  _interactWithEntity(entity) {
+    return false;
   }
 
-  _getTileForMove(dx, dy) {
-    const newX = this.x + dx;
-    const newY = this.y + dy;
-    return this._game.map.getTile(newX, newY);
-  }
+  _moveToTile(newTile) {
+    if (newTile.hasEntity) {
+      // if the interaction with the entity fails, we can't move here
+      if (!this._interactWithEntity(newTile.entity)) {
+        return;
+      }
+    }
 
-  _moveToTile(tile) {
-    const newTile = tile;
     this.tile.entity = null;
-    newTile.entity = this;
     this.tile = newTile;
+    this.tile.entity = this;
   }
 }
 

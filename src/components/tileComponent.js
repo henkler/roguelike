@@ -14,7 +14,7 @@ class TileComponent extends React.Component {
     let displayValue = null;
     let displayClass = 'tile';
 
-    if (!tile.explored) {
+    if (!tile.isExplored) {
       displayValue = <span>?</span>;
       displayClass += ' tile-unexplored';
     } else if (tile.isWall) {
@@ -29,6 +29,10 @@ class TileComponent extends React.Component {
         case Entity.TYPE.enemy:
           displayValue = <span>%</span>;
           displayClass += ' tile-enemy';
+          break;
+        case Entity.TYPE.weapon:
+          displayValue = <span>!</span>;
+          displayClass += ' tile-weapon';
           break;
         default:
           break;

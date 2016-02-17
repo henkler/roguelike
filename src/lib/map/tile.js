@@ -2,27 +2,68 @@ import Entity from '../entities/entity';
 
 class Tile {
   constructor(x, y, type) {
-    this.x = x;
-    this.y = y;
-    this.type = type;
-    this.explored = false;
-    this.entity = null;
+    this._x = x;
+    this._y = y;
+    this._type = type;
+    this._entity = null;
+    this._explored = false;
+  }
+
+  // getters
+  get x() {
+    return this._x;
+  }
+
+  get y() {
+    return this._y;
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  set type(newType) {
+    this._type = newType;
+  }
+
+  get entity() {
+    return this._entity;
+  }
+
+  set entity(newEnity) {
+    this._entity = newEnity;
   }
 
   get isOpen() {
-    return this.type === Tile.TYPE.open && this.entity === null;
+    return this._type === Tile.TYPE.open;
   }
 
   get isWall() {
-    return this.type === Tile.TYPE.wall;
+    return this._type === Tile.TYPE.wall;
+  }
+
+  get isExplored() {
+    return this._explored;
   }
 
   get hasEntity() {
-    return this.entity !== null;
+    return this._entity !== null;
   }
 
   get hasPlayer() {
-    return this.entity !== null && this.entity.type === Entity.TYPE.player;
+    return this._entity !== null && this._entity.type === Entity.TYPE.player;
+  }
+
+  get hasEnemy() {
+    return this._entity !== null && this._entity.type === Entity.TYPE.enemy;
+  }
+
+  get hasWeapon() {
+    return this._entity !== null && this._entity.type === Entity.TYPE.weapon;
+  }
+
+  setExplored() {
+    this._explored = true;
   }
 }
 

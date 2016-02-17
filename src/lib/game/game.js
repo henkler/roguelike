@@ -2,6 +2,7 @@ import Map from '../map/map';
 import Player from '../entities/player';
 import Enemy from '../entities/enemy';
 import PathFinder from '../entities/pathfinder';
+import Weapon from '../entities/weapon';
 
 const DEFAULT_MAP_WIDTH = 30;
 const DEFAULT_MAP_HEIGHT = 30;
@@ -17,6 +18,8 @@ class World {
     this._pathfinder = new PathFinder(this);
 
     this._enemy = new Enemy(this);
+
+    this._weapon = new Weapon(this, 'Claw of Death', 30);
   }
 
   // getters

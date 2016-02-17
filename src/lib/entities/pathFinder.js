@@ -9,7 +9,6 @@ class PathFinder {
     const easystar = new EasyStar.js();
     easystar.setGrid(this._getGridForEasystar());
     easystar.setAcceptableTiles([Tile.TYPE.open]);
-    easystar.enableDiagonals();
     this._easystar = easystar;
   }
 

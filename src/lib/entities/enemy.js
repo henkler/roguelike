@@ -1,59 +1,45 @@
+import MovingEntity from './movingEntity';
 import Entity from './entity';
 
 const DEFAULT_ENEMY_NAME = 'Mireluk';
 const DEFAULT_ENEMY_RANGE = 5;
+const DEFAULT_ENEMY_HEALTH = 20;
 
-class Enemy extends Entity {
+class Enemy extends MovingEntity {
   constructor(game) {
     const emptyTile = game.map.getRandomEmptyTile();
-    super(game, DEFAULT_ENEMY_NAME, Entity.TYPE.enemy, emptyTile);
-
-    this.startX = emptyTile.x;
-    this.startY = emptyTile.y;
-    this.range = DEFAULT_ENEMY_RANGE;
+    super(game, DEFAULT_ENEMY_NAME, Entity.TYPE.enemy, emptyTile, DEFAULT_ENEMY_HEALTH, DEFAULT_ENEMY_RANGE);
   }
 
   move() {
     // only move towards the player if in the enemy's range
-    if (this._isTileInRange(this._world.player.tile)) {
-      this._world.pathfinder.findPathToPlayer(this, this._pathFinderCallback.bind(this));
+    if (super._isTileInRange(this._game.player.tile)) {
+      this._game.pathfinder.findPathToPlayer(this, this._pathFinderCallback.bind(this));
     } else {
-      this._moveRandom();
+      this._moveRandomlyInRange();
     }
   }
 
-  attack() {
-    console.log("attacking");
+  _interactWithEntity(entity) {
+    console.log("Enemy interaction");
+    return false;
   }
 
   _pathFinderCallback(path) {
     let newTile = null;
-    // if a path cannot be found to the player, move randomly to an open tile in range
     if (path === null || path.length === 0) {
       return;
     }
 
     // set the next tile to be the next step on the path to the player
-    newTile = this._world.map.getTile(path[1].x, path[1].y);
+    newTile = this._game.map.getTile(path[1].x, path[1].y);
 
     if (newTile) {
-      if (newTile.hasPlayer) {
-        this.attack();
-      } else {
-        this._moveToTile(newTile);
-      }
+      this._moveToTile(newTile);
     }
   }
 
-  _isTileInRange(tile) {
-    const xDist = this.startX - tile.x;
-    const yDist = this.startY - tile.y;
-    const distanceFromStart = Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-
-    return (distanceFromStart <= this.range);
-  }
-
-  _moveRandom() {
+  _moveRandomlyInRange() {
     let openTiles = [];
 
     for (let x = this.x - 1; x <= this.x + 1; x++) {
@@ -62,7 +48,7 @@ class Enemy extends Entity {
           continue;
         }
 
-        const tile = this._world.map.getTile(x, y);
+        const tile = this._game.map.getTile(x, y);
 
         if (tile.isOpen && this._isTileInRange(tile)) {
           openTiles.push(tile);
