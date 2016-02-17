@@ -1,5 +1,5 @@
 import Tile from './tile';
-import Entity from './entity';
+import Entity from '../entities/entity';
 
 const GENERATOR_WALL_PERCENTAGE = 40;
 const GENERATOR_ITERATIONS = 4;

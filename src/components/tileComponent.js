@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Entity from '../lib/entity';
+import Entity from '../lib/entities/entity';
 
 require('./tileComponent.scss');
 

@@ -1,12 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// import Game from '../lib/game.js';
-import World from '../lib//world';
-import Camera from '../lib//camera';
-import Viewport from '../lib/viewport';
-import Scheduler from '../lib/scheduler';
-
+import RogueLike from '../lib/roguelike.js';
 import MapComponent from './mapComponent';
 
 const KEY_LEFT = 37;
@@ -25,14 +20,16 @@ class UIComponent extends React.Component {
     this.schedulerTickHandler = this.schedulerTick.bind(this);
     this.schedulerInterval = null;
 
-    const world = new World();
-    const camera = new Camera(world.player);
-    const viewport = new Viewport(world, camera);
-    this.scheduler = new Scheduler(world);
+    this._roguelike = new RogueLike();
+
+    this.scheduler = this._roguelike.scheduler;
+    this.game = this._roguelike.game;
+    this.map = this.game.map;
+    this.viewport = this._roguelike.viewport;
 
     this.state = {
-      world,
-      viewport,
+      map: this.map,
+      viewport: this.viewport,
     };
   }
 
@@ -52,13 +49,13 @@ class UIComponent extends React.Component {
 
   schedulerTick() {
     this.scheduler.tick();
-    this.setState({ world: this.state.world });
+    this.setState({ map: this.map });
   }
 
   handleResize() {
     const componentWidth = ReactDOM.findDOMNode(this).clientWidth;
-    this.state.viewport.setWidth(componentWidth);
-    this.setState({ viewport: this.state.viewport });
+    this.viewport.setWidth(componentWidth);
+    this.setState({ viewport: this.viewport });
   }
 
   handleKeypress(event) {
@@ -87,16 +84,16 @@ class UIComponent extends React.Component {
   }
 
   handlePlayerMove(dx, dy) {
-    this.state.world.movePlayer(dx, dy);
-    this.state.viewport.update();
-    this.setState({ world: this.state.world, viewport: this.state.viewport });
+    this.game.movePlayer(dx, dy);
+    this.viewport.update();
+    this.setState({ map: this.map, viewport: this.viewport });
   }
 
   render() {
     return (
       <div>
         <MapComponent
-          map={this.state.world.map}
+          map={this.state.map}
           viewport={this.state.viewport}
         />
       </div>

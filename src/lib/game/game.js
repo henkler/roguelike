@@ -1,7 +1,7 @@
-import Map from './map';
-import Player from './player';
-import Enemy from './enemy';
-import PathFinder from './pathfinder';
+import Map from '../map/map';
+import Player from '../entities/player';
+import Enemy from '../entities/enemy';
+import PathFinder from '../entities/pathfinder';
 
 const DEFAULT_MAP_WIDTH = 30;
 const DEFAULT_MAP_HEIGHT = 30;

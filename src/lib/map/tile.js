@@ -1,4 +1,4 @@
-import Entity from './entity';
+import Entity from '../entities/entity';
 
 class Tile {
   constructor(x, y, type) {

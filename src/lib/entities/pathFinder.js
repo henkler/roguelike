@@ -1,5 +1,5 @@
 import EasyStar from 'easystarjs';
-import Tile from './tile';
+import Tile from '../map/tile';
 
 // use EasyStar.js for A* pathfinding AI for enemy
 class PathFinder {
