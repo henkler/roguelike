@@ -66,9 +66,9 @@ class Tile {
     this._explored = true;
   }
 
-  distanceTo(entity) {
-    const xDist = this.x - entity.x;
-    const yDist = this.y - entity.y;
+  distanceTo(otherTile) {
+    const xDist = this.x - otherTile.x;
+    const yDist = this.y - otherTile.y;
     return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
   }
 }

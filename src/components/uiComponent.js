@@ -9,7 +9,7 @@ const KEY_UP = 38;
 const KEY_RIGHT = 39;
 const KEY_DOWN = 40;
 
-const DEFAULT_SCHEDULER_TICK = 500;
+const DEFAULT_SCHEDULER_TICK = 1000;
 
 class UIComponent extends React.Component {
   constructor(props) {

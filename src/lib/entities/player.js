@@ -35,9 +35,9 @@ class Player extends MovingEntity {
   pickupWeapon(newWeapon) {
     if (!this.weapon || newWeapon.damage > this.weapon.damage) {
       this.weapon = newWeapon;
-      console.log(`Equipped ${newWeapon.name} with base damage ${newWeapon.damage}`);
+      console.log(`Equipped \'${newWeapon.name}\' with base damage ${newWeapon.damage}`);
     } else {
-      console.log(`The ${newWeapon.name} has less damage than your current weapon.  You hurl it into the bushes`);
+      console.log(`The weapon \'${newWeapon.name}\' is worse than your current weapon.  You hurl it into the bushes`);
     }
   }
 
@@ -53,7 +53,7 @@ class Player extends MovingEntity {
   }
 
   isTileInRange(tile) {
-    return (tile.distanceTo(this) <= this.range);
+    return (tile.distanceTo(this.tile) <= this.range);
   }
 
   get attackDamage() {
@@ -90,7 +90,7 @@ class Player extends MovingEntity {
       for (let y = yMin; y <= yMax; y++) {
         // current tile exists, and is within our sights.  Mark it as explored
         const curTile = map.getTile(x, y);
-        if (curTile && curTile.distanceTo(this) <= this.range) {
+        if (curTile && curTile.distanceTo(this.tile) <= this.range) {
           curTile.setExplored();
         }
       }

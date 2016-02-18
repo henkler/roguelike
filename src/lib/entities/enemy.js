@@ -16,14 +16,17 @@ class Enemy extends MovingEntity {
       DEFAULT_ENEMY_RANGE,
       level);
 
-    this.maxDamage = ENEMY_BASE_MAX_DAMAGE * this.level;
     this.xp = ENEMY_BASE_XP * this.level;
     this.health = ENEMY_BASE_HEALTH * this.level;
   }
 
   move() {
+    if (this.isDead) {
+      return;
+    }
+
     // only move towards the player if in the enemy's range
-    if (this._game.player.tile.distanceTo(this) <= this.range) {
+    if (this._game.player.tile.distanceTo(this.startTile) <= this.range) {
       this._game.pathfinder.findPathToPlayer(this, this._pathFinderCallback.bind(this));
     } else {
       this._moveRandomlyInRange();
@@ -31,11 +34,12 @@ class Enemy extends MovingEntity {
   }
 
   die() {
-    console.log("Enemy should die");
+    this.tile.entity = null;
+    console.log(`${this.name} is dead`);
   }
 
   get attackDamage() {
-    return Math.floor(Math.random() * this.maxDamage) + 1;
+    return (Math.floor(Math.random() * ENEMY_BASE_MAX_DAMAGE) + 1) * this.level;
   }
 
   _interactWithEntity(entity) {
@@ -71,7 +75,7 @@ class Enemy extends MovingEntity {
 
         const tile = this._game.map.getTile(x, y);
 
-        if (tile.isOpen && tile.distanceTo(this) <= this.range) {
+        if (tile.isOpen && tile.distanceTo(this.startTile) <= this.range) {
           openTiles.push(tile);
         }
       }
@@ -88,7 +92,7 @@ class Enemy extends MovingEntity {
 const ENEMY_LIST = [
   {
     name: 'Feral Ghoul',
-    level: 1,
+    level: 3,
   },
   {
     name: 'Mireluk',
@@ -96,7 +100,7 @@ const ENEMY_LIST = [
   },
   {
     name: 'Super Mutant',
-    level: 4,
+    level: 5,
   },
   {
     name: 'Guard dog',
@@ -108,7 +112,7 @@ const ENEMY_LIST = [
   },
   {
     name: 'Deathclaw',
-    level: 5,
+    level: 6,
   },
   {
     name: 'Raider',

@@ -147,7 +147,6 @@ class Map {
       if (newTile.isOpen && !newTile.hasEntity) {
         // if the tile is open and there is no player
         if (!this._game.player) {
-          console.log("here");
           tile = newTile;
         } else {
           // if the tile is not in the player's range, we'll use it

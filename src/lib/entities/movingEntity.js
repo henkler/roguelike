@@ -4,8 +4,7 @@ class MovingEntity extends Entity {
   constructor(game, name, type, tile, initialRange, level) {
     super(game, name, type, tile);
 
-    this.startX = tile.x;
-    this.startY = tile.y;
+    this.startTile = tile;
     this.range = initialRange;
     this.level = level;
     this.health = 0;
