@@ -4,7 +4,6 @@ import Entity from './entity';
 const DEFAULT_ENEMY_RANGE = 4;
 const ENEMY_BASE_HEALTH = 10;
 const ENEMY_BASE_XP = 20;
-const ENEMY_BASE_MAX_DAMAGE = 10;
 
 class Enemy extends MovingEntity {
   constructor(game, name, level) {
@@ -36,10 +35,6 @@ class Enemy extends MovingEntity {
   die() {
     this.tile.entity = null;
     console.log(`${this.name} is dead`);
-  }
-
-  get attackDamage() {
-    return (Math.floor(Math.random() * ENEMY_BASE_MAX_DAMAGE) + 1) * this.level;
   }
 
   _interactWithEntity(entity) {

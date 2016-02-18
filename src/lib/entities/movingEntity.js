@@ -1,5 +1,7 @@
 import Entity from './entity';
 
+const DEFAULT_MAX_DAMAGE_PER_LEVEL = 10;
+
 class MovingEntity extends Entity {
   constructor(game, name, type, tile, initialRange, level) {
     super(game, name, type, tile);
@@ -41,6 +43,16 @@ class MovingEntity extends Entity {
 
   get isDead() {
     return this.health === 0;
+  }
+
+  // override this to provide custom damage (e.g. for weapons)
+  get maxDamage() {
+    return DEFAULT_MAX_DAMAGE_PER_LEVEL * this.level;
+  }
+
+  get attackDamage() {
+    // return damage in range of [maxDamage/2] to maxDamage
+    return (Math.ceil(Math.random() * (this.maxDamage / 2)) + (this.maxDamage / 2));
   }
 
   _takeDamage(damage) {

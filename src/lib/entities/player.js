@@ -17,7 +17,7 @@ class Player extends MovingEntity {
 
     this.xp = 0;
     this.health = INITIAL_PLAYER_HEALTH;
-    this.weapon = null;
+    this._weapon = null;
 
     this._markTilesExplored();
   }
@@ -32,8 +32,8 @@ class Player extends MovingEntity {
   }
 
   pickupWeapon(newWeapon) {
-    if (!this.weapon || newWeapon.damage > this.weapon.damage) {
-      this.weapon = newWeapon;
+    if (!this._weapon || newWeapon.damage > this._weapon.damage) {
+      this._weapon = newWeapon;
       console.log(`Equipped \'${newWeapon.name}\' with base damage ${newWeapon.damage}`);
     } else {
       console.log(`The weapon \'${newWeapon.name}\' is worse than your current weapon.  You hurl it into the bushes`);
@@ -60,13 +60,20 @@ class Player extends MovingEntity {
     return (tile.distanceTo(this.tile) <= this.range);
   }
 
-  get attackDamage() {
-    if (this.weapon) {
-      return this.weapon.damage * this.level;
+  get weapon() {
+    return this._weapon ? this.weapon : 'Fists';
+  }
+
+  get maxDamage() {
+    if (this._weapon) {
+      return this._weapon.damage * this.level;
     }
     return this.level;
   }
 
+  get nextLevelXP() {
+    return 0;
+  }
 
   _interactWithEntity(entity) {
     if (entity.isEnemy || entity.isBoss) {

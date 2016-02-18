@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import RogueLike from '../lib/roguelike.js';
 import MapComponent from './mapComponent';
+import StatsComponent from './statsComponent';
 
 const KEY_LEFT = 37;
 const KEY_UP = 38;
@@ -22,6 +23,7 @@ class UIComponent extends React.Component {
 
     this._roguelike = new RogueLike();
 
+    this.player = this._roguelike.player;
     this.scheduler = this._roguelike.scheduler;
     this.game = this._roguelike.game;
     this.map = this.game.map;
@@ -29,6 +31,7 @@ class UIComponent extends React.Component {
 
     this.state = {
       map: this.map,
+      player: this.player,
       viewport: this.viewport,
     };
   }
@@ -49,7 +52,7 @@ class UIComponent extends React.Component {
 
   schedulerTick() {
     this.scheduler.tick();
-    this.setState({ map: this.map });
+    this.setState({ map: this.map, player: this.player });
   }
 
   handleResize() {
@@ -86,16 +89,23 @@ class UIComponent extends React.Component {
   handlePlayerMove(dx, dy) {
     this.game.movePlayer(dx, dy);
     this.viewport.update();
-    this.setState({ map: this.map, viewport: this.viewport });
+    this.setState({ map: this.map, player: this.player, viewport: this.viewport });
   }
 
   render() {
     return (
       <div>
-        <MapComponent
-          map={this.state.map}
-          viewport={this.state.viewport}
-        />
+        <div>
+          <MapComponent
+            map={this.state.map}
+            viewport={this.state.viewport}
+          />
+        </div>
+        <div>
+          <StatsComponent
+            player={this.state.player}
+          />
+        </div>
       </div>
     );
   }

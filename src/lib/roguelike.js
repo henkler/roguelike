@@ -16,6 +16,10 @@ class RogueLike {
     return this._game;
   }
 
+  get player() {
+    return this._game.player;
+  }
+
   get camera() {
     return this._camera;
   }
