@@ -1,17 +1,16 @@
 import MovingEntity from './movingEntity';
 import Entity from './entity';
 
-const DEFAULT_ENEMY_NAME = 'Mireluk';
-const DEFAULT_ENEMY_RANGE = 5;
+const DEFAULT_ENEMY_RANGE = 4;
 const ENEMY_BASE_HEALTH = 10;
 const ENEMY_BASE_XP = 20;
 const ENEMY_BASE_MAX_DAMAGE = 5;
 
 class Enemy extends MovingEntity {
-  constructor(game, level) {
+  constructor(game, name, level) {
     const emptyTile = game.map.getRandomEmptyTile();
     super(game,
-      DEFAULT_ENEMY_NAME,
+      name,
       Entity.TYPE.enemy,
       emptyTile,
       DEFAULT_ENEMY_RANGE,
@@ -24,7 +23,7 @@ class Enemy extends MovingEntity {
 
   move() {
     // only move towards the player if in the enemy's range
-    if (super._isTileInRange(this._game.player.tile)) {
+    if (this._game.player.tile.distanceTo(this) <= this.range) {
       this._game.pathfinder.findPathToPlayer(this, this._pathFinderCallback.bind(this));
     } else {
       this._moveRandomlyInRange();
@@ -72,7 +71,7 @@ class Enemy extends MovingEntity {
 
         const tile = this._game.map.getTile(x, y);
 
-        if (tile.isOpen && this._isTileInRange(tile)) {
+        if (tile.isOpen && tile.distanceTo(this) <= this.range) {
           openTiles.push(tile);
         }
       }
@@ -85,5 +84,53 @@ class Enemy extends MovingEntity {
     }
   }
 }
+
+const ENEMY_LIST = [
+  {
+    name: 'Feral Ghoul',
+    level: 1,
+  },
+  {
+    name: 'Mireluk',
+    level: 2,
+  },
+  {
+    name: 'Super Mutant',
+    level: 4,
+  },
+  {
+    name: 'Guard dog',
+    level: 2,
+  },
+  {
+    name: 'Mole rat',
+    level: 1,
+  },
+  {
+    name: 'Deathclaw',
+    level: 5,
+  },
+  {
+    name: 'Raider',
+    level: 2,
+  },
+  {
+    name: 'Glowing One',
+    level: 3,
+  },
+  {
+    name: 'Radroach',
+    level: 1,
+  },
+  {
+    name: 'Yao guai',
+    level: 2,
+  },
+];
+
+Enemy.createRandom = function createRandom(game) {
+  const randomEnemyStats = ENEMY_LIST[Math.floor(Math.random() * ENEMY_LIST.length)];
+  return new Enemy(game, randomEnemyStats.name, randomEnemyStats.level);
+};
 
 export default Enemy;

@@ -4,7 +4,7 @@ class Scheduler {
   }
 
   tick() {
-    this._game._enemy.move();
+    this._game._enemyList.forEach((enemy) => enemy.move());
   }
 }
 

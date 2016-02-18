@@ -52,6 +52,10 @@ class Player extends MovingEntity {
     return (distanceFromPlayer <= this.range);
   }
 
+  isTileInRange(tile) {
+    return (tile.distanceTo(this) <= this.range);
+  }
+
   get attackDamage() {
     if (this.weapon) {
       return this.weapon.damage * this.level;
@@ -74,14 +78,6 @@ class Player extends MovingEntity {
     return false;
   }
 
-  _isTileInRange(tile) {
-    const xDist = this.x - tile.x;
-    const yDist = this.y - tile.y;
-    const distanceFromStart = Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-
-    return (distanceFromStart <= this.range);
-  }
-
   _markTilesExplored() {
     const xMin = this.x - this.range;
     const xMax = this.x + this.range;
@@ -94,7 +90,7 @@ class Player extends MovingEntity {
       for (let y = yMin; y <= yMax; y++) {
         // current tile exists, and is within our sights.  Mark it as explored
         const curTile = map.getTile(x, y);
-        if (curTile && this._isTileInRange(curTile)) {
+        if (curTile && curTile.distanceTo(this) <= this.range) {
           curTile.setExplored();
         }
       }

@@ -6,7 +6,8 @@ const GENERATOR_ITERATIONS = 4;
 const GENERATOR_SMOOTHING_ITERATIONS = 3;
 
 class Map {
-  constructor(width, height) {
+  constructor(game, width, height) {
+    this._game = game;
     this._tiles = null;
     this._width = width;
     this._height = height;
@@ -137,13 +138,27 @@ class Map {
   }
 
   getRandomEmptyTile() {
-    let tile;
+    let tile = null;
+    let numIterations = 0;
     do {
       const x = Math.floor((Math.random() * this.width));
       const y = Math.floor((Math.random() * this.height));
-      tile = this.getTile(x, y);
+      const newTile = this.getTile(x, y);
+      if (newTile.isOpen && !newTile.hasEntity) {
+        // if the tile is open and there is no player
+        if (!this._game.player) {
+          console.log("here");
+          tile = newTile;
+        } else {
+          // if the tile is not in the player's range, we'll use it
+          if (!this._game.player.isTileInRange(newTile)) {
+            tile = newTile;
+          }
+        }
+      }
+      numIterations++;
     }
-    while (tile.entity !== null || tile.type !== Tile.TYPE.open);
+    while (!tile || numIterations > 20);
 
     return tile;
   }

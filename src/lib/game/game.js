@@ -8,18 +8,20 @@ const DEFAULT_MAP_WIDTH = 30;
 const DEFAULT_MAP_HEIGHT = 30;
 
 const NUM_ENEMIES = 10;
+const NUM_WEAPONS = 10;
+
 const NUM_POTIONS = 5;
 
-class World {
+class Game {
   constructor() {
-    this._map = new Map(DEFAULT_MAP_WIDTH, DEFAULT_MAP_HEIGHT);
+    this._map = new Map(this, DEFAULT_MAP_WIDTH, DEFAULT_MAP_HEIGHT);
     this._player = new Player(this);
-
     this._pathfinder = new PathFinder(this);
+    this._enemyList = [];
+    this._weaponList = [];
 
-    this._enemy = new Enemy(this, 1);
-
-    this._weapon = new Weapon(this, 'Claw of Death', 30);
+    this._generateWeapons();
+    this._generateEnemies();
   }
 
   // getters
@@ -36,19 +38,25 @@ class World {
   }
 
   // public methods
-
   movePlayer(dx, dy) {
     this._player.move(dx, dy);
   }
 
   // private methods
+  _generateEnemies() {
+    for (let i = 0; i < NUM_ENEMIES; i++) {
+      this._enemyList.push(Enemy.createRandom(this));
+    }
+  }
 
-  _init() {
-
+  _generateWeapons() {
+    for (let i = 0; i < NUM_WEAPONS; i++) {
+      this._weaponList.push(Weapon.createRandom(this));
+    }
   }
 }
 
-export default World;
+export default Game;
 
 /*
 var player;

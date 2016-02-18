@@ -63,14 +63,6 @@ class MovingEntity extends Entity {
     const newY = this.y + dy;
     return this._game.map.getTile(newX, newY);
   }
-
-  _isTileInRange(tile) {
-    const xDist = this.startX - tile.x;
-    const yDist = this.startY - tile.y;
-    const distanceFromStart = Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-
-    return (distanceFromStart <= this.range);
-  }
 }
 
 export default MovingEntity;
