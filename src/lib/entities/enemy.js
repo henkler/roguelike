@@ -4,7 +4,7 @@ import Entity from './entity';
 const DEFAULT_ENEMY_RANGE = 4;
 const ENEMY_BASE_HEALTH = 10;
 const ENEMY_BASE_XP = 20;
-const ENEMY_BASE_MAX_DAMAGE = 5;
+const ENEMY_BASE_MAX_DAMAGE = 10;
 
 class Enemy extends MovingEntity {
   constructor(game, name, level) {

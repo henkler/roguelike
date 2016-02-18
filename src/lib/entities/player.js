@@ -1,8 +1,7 @@
 import MovingEntity from './movingEntity';
 import Entity from './entity';
 
-const DEFAULT_PLAYER_NAME = 'Hero';
-
+const DEFAULT_PLAYER_NAME = 'The Hero';
 const INITIAL_PLAYER_SIGHT = 4;
 const INITIAL_PLAYER_HEALTH = 100;
 
@@ -70,7 +69,7 @@ class Player extends MovingEntity {
 
 
   _interactWithEntity(entity) {
-    if (entity.isEnemy) {
+    if (entity.isEnemy || entity.isBoss) {
       const damage = this.attackDamage;
       this.attack(entity, damage);
       // we can move through the enemy if it is dead

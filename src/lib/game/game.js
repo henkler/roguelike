@@ -1,5 +1,6 @@
 import Map from '../map/map';
 import Player from '../entities/player';
+import Boss from '../entities/boss';
 import Enemy from '../entities/enemy';
 import Weapon from '../entities/weapon';
 import Potion from '../entities/potion';
@@ -16,6 +17,7 @@ class Game {
   constructor() {
     this._map = new Map(this, DEFAULT_MAP_WIDTH, DEFAULT_MAP_HEIGHT);
     this._player = new Player(this);
+    this._boss = new Boss(this);
     this._pathfinder = new PathFinder(this);
     this._enemyList = [];
     this._weaponList = [];

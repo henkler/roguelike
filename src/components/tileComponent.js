@@ -30,6 +30,10 @@ class TileComponent extends React.Component {
           displayValue = <span>{tile.entity.level}</span>;
           displayClass += ' tile-enemy';
           break;
+        case Entity.TYPE.boss:
+          displayValue = <span>B</span>;
+          displayClass += ' tile-boss';
+          break;
         case Entity.TYPE.weapon:
           displayValue = <span>!</span>;
           displayClass += ' tile-weapon';

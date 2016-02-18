@@ -24,6 +24,10 @@ class Entity {
     return this.type === Entity.TYPE.enemy;
   }
 
+  get isBoss() {
+    return this.type === Entity.TYPE.boss;
+  }
+
   get isWeapon() {
     return this.type === Entity.TYPE.weapon;
   }
