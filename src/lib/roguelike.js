@@ -16,6 +16,10 @@ class RogueLike {
     return this._game;
   }
 
+  get logger() {
+    return this._game.logger;
+  }
+
   get player() {
     return this._game.player;
   }

@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 import RogueLike from '../lib/roguelike.js';
 import MapComponent from './mapComponent';
 import StatsComponent from './statsComponent';
+import MessageBoxComponent from './messageBoxComponent';
+
+require('./uiComponent.scss');
 
 const KEY_LEFT = 37;
 const KEY_UP = 38;
@@ -23,6 +26,7 @@ class UIComponent extends React.Component {
 
     this._roguelike = new RogueLike();
 
+    this.logger = this._roguelike.logger;
     this.player = this._roguelike.player;
     this.scheduler = this._roguelike.scheduler;
     this.game = this._roguelike.game;
@@ -31,6 +35,7 @@ class UIComponent extends React.Component {
 
     this.state = {
       map: this.map,
+      logger: this.logger,
       player: this.player,
       viewport: this.viewport,
     };
@@ -52,7 +57,7 @@ class UIComponent extends React.Component {
 
   schedulerTick() {
     this.scheduler.tick();
-    this.setState({ map: this.map, player: this.player });
+    this.updateState();
   }
 
   handleResize() {
@@ -89,7 +94,16 @@ class UIComponent extends React.Component {
   handlePlayerMove(dx, dy) {
     this.game.movePlayer(dx, dy);
     this.viewport.update();
-    this.setState({ map: this.map, player: this.player, viewport: this.viewport });
+    this.updateState();
+  }
+
+  updateState() {
+    this.setState({
+      map: this.map,
+      logger: this.logger,
+      player: this.player,
+      viewport: this.viewport,
+    });
   }
 
   render() {
@@ -101,10 +115,11 @@ class UIComponent extends React.Component {
             viewport={this.state.viewport}
           />
         </div>
-        <div>
+        <div className="footer">
           <StatsComponent
             player={this.state.player}
           />
+          <MessageBoxComponent messages={this.state.logger.messages}/>
         </div>
       </div>
     );

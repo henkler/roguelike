@@ -28,21 +28,21 @@ class Player extends MovingEntity {
   }
 
   die() {
-    console.log("I'm dying");
+    this._game.storeMessage("I'm dying");
   }
 
   pickupWeapon(newWeapon) {
     if (!this._weapon || newWeapon.damage > this._weapon.damage) {
       this._weapon = newWeapon;
-      console.log(`Equipped \'${newWeapon.name}\' with base damage ${newWeapon.damage}`);
+      this._game.storeMessage(`WEAPON: Equipping \'${newWeapon.name}\' with base damage ${newWeapon.damage}`);
     } else {
-      console.log(`The weapon \'${newWeapon.name}\' is worse than your current weapon.  You hurl it into the bushes`);
+      this._game.storeMessage(`WEAPON: The weapon \'${newWeapon.name}\' is worse than your current weapon.  It is hurled into the bushes`);
     }
   }
 
   pickupPotion(potion) {
     this.health += potion.restoresHealth;
-    console.log(`Found a ${potion.name}.  Restored ${potion.restoresHealth} health`);
+    this._game.storeMessage(`HEALTH: Found a ${potion.name}.  Restored ${potion.restoresHealth} health!`);
   }
 
   // returns true if the tile is visible to the player given their sight length
@@ -60,8 +60,8 @@ class Player extends MovingEntity {
     return (tile.distanceTo(this.tile) <= this.range);
   }
 
-  get weapon() {
-    return this._weapon ? this.weapon : 'Fists';
+  get weaponName() {
+    return this._weapon ? this._weapon.name : 'Fists';
   }
 
   get maxDamage() {

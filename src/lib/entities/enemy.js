@@ -34,7 +34,7 @@ class Enemy extends MovingEntity {
 
   die() {
     this.tile.entity = null;
-    console.log(`${this.name} is dead`);
+    this._game.storeMessage(`ATTACK: ${this.name} is now dead.`);
   }
 
   _interactWithEntity(entity) {
@@ -60,7 +60,7 @@ class Enemy extends MovingEntity {
   }
 
   _moveRandomlyInRange() {
-    let openTiles = [];
+    const openTiles = [];
 
     for (let x = this.x - 1; x <= this.x + 1; x++) {
       for (let y = this.y - 1; y <= this.y + 1; y++) {

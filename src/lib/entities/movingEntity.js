@@ -27,12 +27,12 @@ class MovingEntity extends Entity {
   }
 
   attack(entity, damage) {
-    console.log(`${this.name} attacks ${entity.name}${this.weapon ? ' with ' + this.weapon.name : ''}`);
+    this._game.storeMessage(`ATTACK: ${this.name} attacks ${entity.name}${this.weapon ? ' with ' + this.weapon.name : ''}`);
     entity.handleAttack(this, damage);
   }
 
   handleAttack(entity, damage) {
-    console.log(`${this.name} receives ${damage} points of damage from ${entity.name}`);
+    this._game.storeMessage(`ATTACK: ${this.name} receives ${damage} points of damage from ${entity.name}`);
     this._takeDamage(damage);
   }
 
@@ -65,7 +65,7 @@ class MovingEntity extends Entity {
     if (this.isDead) {
       this.die();
     } else {
-      console.log(`${this.name} has ${this.health} hit points remaining`);
+      this._game.storeMessage(`HP: ${this.name} has ${this.health} hit points remaining`);
     }
   }
 

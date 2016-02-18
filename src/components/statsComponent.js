@@ -13,7 +13,7 @@ class StatsComponent extends React.Component {
         <ul>
           <li>Health: {this.props.player.health}</li>
           <li>Level: {this.props.player.level}</li>
-          <li>Weapon: {this.props.player.weapon}</li>
+          <li>Weapon: {this.props.player.weaponName}</li>
           <li>Max Attack: {this.props.player.maxDamage}</li>
           <li>XP: {this.props.player.xp}</li>
           <li>Next Level: {this.props.player.nextLevelXP}</li>
