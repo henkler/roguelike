@@ -28,6 +28,10 @@ class Entity {
     return this.type === Entity.TYPE.weapon;
   }
 
+  get isPotion() {
+    return this.type === Entity.TYPE.potion;
+  }
+
   // method stub
   _interactWithEntity(entity) {
     return false;

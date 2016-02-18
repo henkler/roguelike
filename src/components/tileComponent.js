@@ -34,6 +34,10 @@ class TileComponent extends React.Component {
           displayValue = <span>!</span>;
           displayClass += ' tile-weapon';
           break;
+        case Entity.TYPE.potion:
+          displayValue = <span>%</span>;
+          displayClass += ' tile-potion';
+          break;
         default:
           break;
       }

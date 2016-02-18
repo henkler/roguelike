@@ -41,6 +41,11 @@ class Player extends MovingEntity {
     }
   }
 
+  pickupPotion(potion) {
+    this.health += potion.restoresHealth;
+    console.log(`Found a ${potion.name}.  Restored ${potion.restoresHealth} health`);
+  }
+
   // returns true if the tile is visible to the player given their sight length
   isTileVisible(tile) {
     const xDist = this.x - tile.x;
@@ -72,6 +77,9 @@ class Player extends MovingEntity {
       return entity.isDead;
     } else if (entity.isWeapon) {
       this.pickupWeapon(entity);
+      return true;
+    } else if (entity.isPotion) {
+      this.pickupPotion(entity);
       return true;
     }
 

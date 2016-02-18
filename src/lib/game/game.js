@@ -1,16 +1,16 @@
 import Map from '../map/map';
 import Player from '../entities/player';
 import Enemy from '../entities/enemy';
-import PathFinder from '../entities/pathfinder';
 import Weapon from '../entities/weapon';
+import Potion from '../entities/potion';
+import PathFinder from '../entities/pathfinder';
 
 const DEFAULT_MAP_WIDTH = 30;
 const DEFAULT_MAP_HEIGHT = 30;
 
 const NUM_ENEMIES = 10;
 const NUM_WEAPONS = 10;
-
-const NUM_POTIONS = 5;
+const NUM_POTIONS = 10;
 
 class Game {
   constructor() {
@@ -19,8 +19,10 @@ class Game {
     this._pathfinder = new PathFinder(this);
     this._enemyList = [];
     this._weaponList = [];
+    this._potionList = [];
 
     this._generateWeapons();
+    this._generatePotions();
     this._generateEnemies();
   }
 
@@ -46,6 +48,12 @@ class Game {
   _generateEnemies() {
     for (let i = 0; i < NUM_ENEMIES; i++) {
       this._enemyList.push(Enemy.createRandom(this));
+    }
+  }
+
+  _generatePotions() {
+    for (let i = 0; i < NUM_POTIONS; i++) {
+      this._potionList.push(Potion.createRandom(this));
     }
   }
 
