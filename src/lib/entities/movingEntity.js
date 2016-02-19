@@ -52,7 +52,7 @@ class MovingEntity extends Entity {
 
   get attackDamage() {
     // return damage in range of [maxDamage/2] to maxDamage
-    return (Math.ceil(Math.random() * (this.maxDamage / 2)) + (this.maxDamage / 2));
+    return (Math.ceil(Math.random() * (this.maxDamage / 2)) + Math.ceil(this.maxDamage / 2));
   }
 
   _takeDamage(damage) {

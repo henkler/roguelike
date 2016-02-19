@@ -28,7 +28,8 @@ class Player extends MovingEntity {
   }
 
   die() {
-    this._game.storeMessage("I'm dying");
+    this._game.storeMessage(`\n${this.name} falls to the ground.\nYou realize that evil will always triumph because good is dumb.\nFade to black.`);
+    this._game.playerDie();
   }
 
   pickupWeapon(newWeapon) {

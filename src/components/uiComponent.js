@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import RogueLike from '../lib/roguelike.js';
+import Game from '../lib/game.js';
 import MapComponent from './mapComponent';
 import FooterComponent from './footerComponent';
 
@@ -23,14 +23,13 @@ class UIComponent extends React.Component {
     this.schedulerTickHandler = this.schedulerTick.bind(this);
     this.schedulerInterval = null;
 
-    this._roguelike = new RogueLike();
+    this.game = new Game();
 
-    this.logger = this._roguelike.logger;
-    this.player = this._roguelike.player;
-    this.scheduler = this._roguelike.scheduler;
-    this.game = this._roguelike.game;
+    this.logger = this.game.logger;
+    this.player = this.game.player;
+    this.scheduler = this.game.scheduler;
     this.map = this.game.map;
-    this.viewport = this._roguelike.viewport;
+    this.viewport = this.game.viewport;
 
     this.state = {
       map: this.map,

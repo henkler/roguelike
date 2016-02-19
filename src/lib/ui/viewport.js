@@ -4,11 +4,11 @@ const INITIAL_WIDTH = 10;
 const INITIAL_HEIGHT = 10;
 
 class Viewport {
-  constructor(game, camera) {
+  constructor(game, map, camera) {
     this._game = game;
     this._camera = camera;
-    this.mapWidth = this._game.map.width;
-    this.mapHeight = this._game.map.height;
+    this.mapWidth = map.width;
+    this.mapHeight = map.height;
 
     this.width = null;
     this.height = null;

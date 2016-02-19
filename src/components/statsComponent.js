@@ -11,6 +11,7 @@ const StatsComponent = (props) => (
           <li>Max Attack: {props.player.maxDamage}</li>
           <li>XP: {props.player.xp}</li>
           <li>Next Level: {props.player.nextLevelXP}</li>
+          <li>Position: {props.player.x}, {props.player.y}</li>
         </ul>
       </div>
 );
