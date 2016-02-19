@@ -5,7 +5,7 @@ import RogueLike from '../lib/roguelike.js';
 import MapComponent from './mapComponent';
 import FooterComponent from './footerComponent';
 
-require('./uiComponent.scss');
+require('../styles/uiComponent.scss');
 
 const KEY_LEFT = 37;
 const KEY_UP = 38;

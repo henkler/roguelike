@@ -1,8 +1,7 @@
 import React from 'react';
-
 import TileComponent from './tileComponent';
 
-require('./mapComponent.scss');
+require('../styles/mapComponent.scss');
 
 class MapComponent extends React.Component {
   constructor(props) {
@@ -10,7 +9,7 @@ class MapComponent extends React.Component {
   }
 
   _renderMapTiles() {
-    let tiles = [];
+    const tiles = [];
     const vp = this.props.viewport;
     const map = this.props.map;
 

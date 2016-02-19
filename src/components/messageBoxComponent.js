@@ -1,6 +1,6 @@
 import React from 'react';
 
-require('./messageBoxComponent.scss');
+require('../styles/messageBoxComponent.scss');
 
 class MessageBoxComponent extends React.Component {
   constructor(props) {

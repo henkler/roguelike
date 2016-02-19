@@ -1,6 +1,6 @@
 import React from 'react';
 
-require('./tileComponent.scss');
+require('../styles/tileComponent.scss');
 
 const TileComponent = (props) => (
     <div className={`tile ${props.tile.typeName}`}>

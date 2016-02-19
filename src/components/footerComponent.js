@@ -2,7 +2,7 @@ import React from 'react';
 import StatsComponent from './statsComponent';
 import MessageBoxComponent from './messageBoxComponent';
 
-require('./footerComponent.scss');
+require('../styles/footerComponent.scss');
 
 const FooterComponent = (props) => (
     <div className="footer">
