@@ -63,7 +63,6 @@ class UIComponent extends React.Component {
     const mapWidth = ReactDOM.findDOMNode(this.refs.map).clientWidth;
     const mapHeight = ReactDOM.findDOMNode(this.refs.map).clientHeight;
 
-    console.log(`width:${mapWidth},height:${mapHeight}`);
     this.viewport.setSize(mapWidth, mapHeight);
     this.setState({ viewport: this.viewport });
   }

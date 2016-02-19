@@ -16,6 +16,40 @@ class Entity {
     return this.tile.y;
   }
 
+  get displayChar() {
+    switch (this.type) {
+      case Entity.TYPE.player:
+        return '@';
+      case Entity.TYPE.boss:
+        return 'B';
+      case Entity.TYPE.enemy:
+        return this.level.toString();
+      case Entity.TYPE.weapon:
+        return '!';
+      case Entity.TYPE.potion:
+        return '%';
+      default:
+        return '_';
+    }
+  }
+
+  get typeName() {
+    switch (this.type) {
+      case Entity.TYPE.player:
+        return 'player';
+      case Entity.TYPE.boss:
+        return 'boss';
+      case Entity.TYPE.enemy:
+        return 'enemy';
+      case Entity.TYPE.weapon:
+        return 'weapon';
+      case Entity.TYPE.potion:
+        return 'potion';
+      default:
+        return null;
+    }
+  }
+
   get isPlayer() {
     return this.type === Entity.TYPE.player;
   }
@@ -37,7 +71,7 @@ class Entity {
   }
 
   // method stub
-  _interactWithEntity(entity) {
+  _interactWithEntity() {
     return false;
   }
 

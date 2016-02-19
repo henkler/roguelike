@@ -7,34 +7,34 @@
   display: inline-block;
 }
 
-.tile-unexplored {
+.unexplored {
   background-color: #1a1a1a;
 }
 
-.tile-wall {
+.wall {
   color: #cd853f;
 }
 
-.tile-open {
+.open {
   color: white;
 }
 
-.tile-player {
+.player {
   color: green;
 }
 
-.tile-enemy {
+.enemy {
   color: orange;
 }
 
-.tile-boss {
+.boss {
   color: red;
 }
 
-.tile-weapon {
+.weapon {
   color: yellow;
 }
 
-.tile-potion {
+.potion {
   color: blue;
 }
