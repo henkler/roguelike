@@ -25,5 +25,7 @@ Flexboxes are used to make sure the content looks good no matter the screen size
 Builds as a single page app through webpack.
 
 Run `npm run build` to build the minified production code in the /dist folder
+
 Run `npm start` to run the local dev server running on http://localhost:8080
+
 Run `npm run lint` to run code linting
