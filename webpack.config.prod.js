@@ -3,7 +3,6 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',
   entry: ['./src/app'],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -11,13 +10,13 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-      compressor: {
+      compress: {
         warnings: false,
       },
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/indexprod.html',
     }),
   ],
   module: {
@@ -32,5 +31,9 @@ module.exports = {
         loaders: ['style', 'css', 'sass'],
       },
     ],
+  },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM',
   },
 };

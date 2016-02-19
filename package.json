@@ -30,7 +30,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.prod.js",
+    "build": "webpack --config webpack.config.prod.js --display-modules",
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "lint": "eslint src"
   },

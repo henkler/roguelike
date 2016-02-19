@@ -1,7 +1,7 @@
 import Camera from './ui/camera';
 import Viewport from './ui/viewport';
-import Scheduler from './game/scheduler';
-import MessageLogger from './game/messageLogger';
+import Scheduler from './utils/scheduler';
+import MessageLogger from './utils/messageLogger';
 import Map from './map/map';
 import Player from './entities/player';
 import Enemy from './entities/enemy';
@@ -157,6 +157,7 @@ class Game {
 |___|  |_||_______||_______||_______||_______||_______||___| |___| |_||_______|`;
 
     message += '\n';
+    message += 'https://github.com/henkler/roguelike\n';
     message += '<<explore, collect weapons, collect potions, avoid/kill enemies, level up, kill the boss>>\n';
 
     this.storeMessage(message);
