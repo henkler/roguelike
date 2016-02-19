@@ -15,7 +15,7 @@ const DEFAULT_MAP_HEIGHT = 150;
 
 const NUM_ENEMIES = 60;
 const NUM_WEAPONS = 30;
-const NUM_POTIONS = 30;
+const NUM_POTIONS = 40;
 
 export const GameStatus = {
   loading: 0,
