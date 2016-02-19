@@ -69,23 +69,28 @@ class Game {
     return this._status;
   }
 
+  get isPlaying() {
+    return this._status === Game.STATUS.playing;
+  }
+
   // public methods
   storeMessage(text) {
     this._logger.storeMessage(text);
   }
 
   movePlayer(dx, dy) {
+    if (!this.isPlaying) {
+      return;
+    }
     this._player.move(dx, dy);
   }
 
   playerDie() {
     this._status = Game.STATUS.lose;
-    this._cleanup();
   }
 
   playerWin() {
     this._status = Game.STATUS.win;
-    this._cleanup();
   }
 
   // private methods
@@ -110,13 +115,6 @@ class Game {
     this._introMessage();
 
     this.storeMessage(`${this._player.name} awakens in a strange place, naked and afraid.\n`);
-  }
-
-  _cleanup() {
-    this._boss = null;
-    this._enemyList = [];
-    this._weaponList = [];
-    this._potionList = [];
   }
 
   _generateEnemies() {

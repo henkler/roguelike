@@ -32,6 +32,7 @@ class UIComponent extends React.Component {
     this.viewport = this.game.viewport;
 
     this.state = {
+      game: this.game,
       map: this.map,
       logger: this.logger,
       player: this.player,
@@ -99,6 +100,7 @@ class UIComponent extends React.Component {
 
   updateState() {
     this.setState({
+      game: this.game,
       map: this.map,
       logger: this.logger,
       player: this.player,
@@ -112,6 +114,7 @@ class UIComponent extends React.Component {
         <MapComponent ref="map"
           map={this.state.map}
           viewport={this.state.viewport}
+          gameStatus={this.state.game.status}
         />
         <FooterComponent player={this.state.player} logger={this.state.logger} />
       </div>

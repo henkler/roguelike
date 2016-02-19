@@ -40,6 +40,7 @@ class MapComponent extends React.Component {
 MapComponent.propTypes = {
   map: React.PropTypes.object.isRequired,
   viewport: React.PropTypes.object.isRequired,
+  gameStatus: React.PropTypes.number.isRequired,
 };
 
 export default MapComponent;
