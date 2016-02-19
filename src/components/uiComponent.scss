@@ -1,3 +1,11 @@
-.footer {
+body {
+  background-color: black;
+  height: 100%;
+  margin: 0;
+}
+
+.roguelike {
   display: flex;
+  flex-flow: column;
+  height: 100%;
 }

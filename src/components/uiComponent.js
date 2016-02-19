@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 
 import RogueLike from '../lib/roguelike.js';
 import MapComponent from './mapComponent';
-import StatsComponent from './statsComponent';
-import MessageBoxComponent from './messageBoxComponent';
+import FooterComponent from './footerComponent';
 
 require('./uiComponent.scss');
 
@@ -61,8 +60,11 @@ class UIComponent extends React.Component {
   }
 
   handleResize() {
-    const componentWidth = ReactDOM.findDOMNode(this).clientWidth;
-    this.viewport.setWidth(componentWidth);
+    const mapWidth = ReactDOM.findDOMNode(this.refs.map).clientWidth;
+    const mapHeight = ReactDOM.findDOMNode(this.refs.map).clientHeight;
+
+    console.log(`width:${mapWidth},height:${mapHeight}`);
+    this.viewport.setSize(mapWidth, mapHeight);
     this.setState({ viewport: this.viewport });
   }
 
@@ -108,19 +110,12 @@ class UIComponent extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <MapComponent
-            map={this.state.map}
-            viewport={this.state.viewport}
-          />
-        </div>
-        <div className="footer">
-          <StatsComponent
-            player={this.state.player}
-          />
-          <MessageBoxComponent messages={this.state.logger.messages}/>
-        </div>
+      <div className="roguelike">
+        <MapComponent ref="map"
+          map={this.state.map}
+          viewport={this.state.viewport}
+        />
+        <FooterComponent player={this.state.player} logger={this.state.logger} />
       </div>
     );
   }

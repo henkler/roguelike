@@ -1,9 +1,11 @@
 .stats-box {
-  width: 250px;
+  flex: 1 0 250px;
   height: 250px;
   background-color: black;
   border: 5px solid #aaa;
   border-radius: 10px;
+  font-family: 'Courier New';
+  margin-right: 5px;
 }
 
 .stats-box ul {

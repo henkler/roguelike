@@ -1,4 +1,10 @@
 .map {
+  flex: 1;
+  overflow: hidden;
   background-color: black;
   text-align: center;
+  border: 5px solid #aaa;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 5px;
 }

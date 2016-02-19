@@ -157,7 +157,7 @@ class Map {
       }
       numIterations++;
     }
-    while (!tile || numIterations > 20);
+    while (!tile && numIterations < 20);
 
     return tile;
   }

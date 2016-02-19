@@ -1,5 +1,7 @@
 const TILE_WIDTH = 35;
 const TILE_HEIGHT = 35;
+const INITIAL_WIDTH = 10;
+const INITIAL_HEIGHT = 10;
 
 class Viewport {
   constructor(game, camera) {
@@ -16,15 +18,15 @@ class Viewport {
     this.yMin = null;
     this.yMax = null;
 
-    this.width = Math.floor(window.innerWidth / TILE_WIDTH);
-    this.height = Math.floor(window.innerHeight / TILE_HEIGHT);
+    this.width = INITIAL_WIDTH;
+    this.height = INITIAL_HEIGHT;
 
     this.update();
   }
 
-  setWidth(width) {
-    this.width = Math.floor(width / TILE_WIDTH);
-    this.height = Math.floor((window.innerHeight - 20) / TILE_HEIGHT);
+  setSize(width, height) {
+    this.width = Math.floor((width - 20) / TILE_WIDTH);
+    this.height = Math.floor((height - 20) / TILE_HEIGHT);
 
     this.update();
   }
@@ -32,7 +34,7 @@ class Viewport {
   update() {
     // try to center the viewport around the camera if possible
     this.xMin = this._camera.x - Math.floor(this.width / 2);
-    this.xMax = this._camera.x + Math.floor(this.width / 2);
+    this.xMax = this._camera.x + Math.ceil(this.width / 2) - 1;
 
     if (this.xMin <= 0) {
       this.xMin = 0;
@@ -43,7 +45,7 @@ class Viewport {
     }
 
     this.yMin = this._camera.y - Math.floor(this.height / 2);
-    this.yMax = this._camera.y + Math.floor(this.height / 2);
+    this.yMax = this._camera.y + Math.ceil(this.height / 2) - 1;
 
     if (this.yMin <= 0) {
       this.yMin = 0;

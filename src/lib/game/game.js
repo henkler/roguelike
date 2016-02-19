@@ -7,12 +7,12 @@ import Weapon from '../entities/weapon';
 import Potion from '../entities/potion';
 import PathFinder from '../entities/pathfinder';
 
-const DEFAULT_MAP_WIDTH = 30;
-const DEFAULT_MAP_HEIGHT = 30;
+const DEFAULT_MAP_WIDTH = 150;
+const DEFAULT_MAP_HEIGHT = 150;
 
-const NUM_ENEMIES = 10;
-const NUM_WEAPONS = 10;
-const NUM_POTIONS = 10;
+const NUM_ENEMIES = 50;
+const NUM_WEAPONS = 20;
+const NUM_POTIONS = 20;
 
 class Game {
   constructor() {
