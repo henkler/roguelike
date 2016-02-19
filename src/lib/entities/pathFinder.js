@@ -1,5 +1,5 @@
 import EasyStar from 'easystarjs';
-import Tile from '../map/tile';
+import { TileType } from '../map/tile';
 
 // use EasyStar.js for A* pathfinding AI for enemy
 class PathFinder {
@@ -8,11 +8,12 @@ class PathFinder {
 
     const easystar = new EasyStar.js();
     easystar.setGrid(this._getGridForEasystar());
-    easystar.setAcceptableTiles([Tile.TYPE.open]);
+    easystar.setAcceptableTiles([TileType.open]);
     this._easystar = easystar;
   }
 
-  // given an entity, finds the path between the entity and the player.  Callback is called with the path
+  // given an entity, finds the path between the entity and the player.
+  // Callback is called with the path
   findPathToPlayer(entity, callback) {
     const player = this._game.player;
     this._easystar.findPath(entity.x, entity.y, player.x, player.y, callback);

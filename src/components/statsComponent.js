@@ -12,6 +12,7 @@ const StatsComponent = (props) => (
           <li>XP: {props.player.xp}</li>
           <li>Next Level: {props.player.nextLevelXP}</li>
           <li>Position: {props.player.x}, {props.player.y}</li>
+          <li>Boss: {props.player.bossXPosition}, {props.player.bossYPosition}</li>
         </ul>
       </div>
 );

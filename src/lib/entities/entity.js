@@ -1,3 +1,11 @@
+export const EntityType = {
+  player: 0,
+  boss: 1,
+  enemy: 2,
+  weapon: 3,
+  potion: 4,
+};
+
 class Entity {
   constructor(game, name, type, tile) {
     this._game = game;
@@ -18,15 +26,15 @@ class Entity {
 
   get displayChar() {
     switch (this.type) {
-      case Entity.TYPE.player:
+      case EntityType.player:
         return '@';
-      case Entity.TYPE.boss:
+      case EntityType.boss:
         return 'B';
-      case Entity.TYPE.enemy:
+      case EntityType.enemy:
         return this.level.toString();
-      case Entity.TYPE.weapon:
+      case EntityType.weapon:
         return '!';
-      case Entity.TYPE.potion:
+      case EntityType.potion:
         return '%';
       default:
         return '_';
@@ -35,15 +43,15 @@ class Entity {
 
   get typeName() {
     switch (this.type) {
-      case Entity.TYPE.player:
+      case EntityType.player:
         return 'player';
-      case Entity.TYPE.boss:
+      case EntityType.boss:
         return 'boss';
-      case Entity.TYPE.enemy:
+      case EntityType.enemy:
         return 'enemy';
-      case Entity.TYPE.weapon:
+      case EntityType.weapon:
         return 'weapon';
-      case Entity.TYPE.potion:
+      case EntityType.potion:
         return 'potion';
       default:
         return null;
@@ -51,23 +59,23 @@ class Entity {
   }
 
   get isPlayer() {
-    return this.type === Entity.TYPE.player;
+    return this.type === EntityType.player;
   }
 
   get isEnemy() {
-    return this.type === Entity.TYPE.enemy;
+    return this.type === EntityType.enemy;
   }
 
   get isBoss() {
-    return this.type === Entity.TYPE.boss;
+    return this.type === EntityType.boss;
   }
 
   get isWeapon() {
-    return this.type === Entity.TYPE.weapon;
+    return this.type === EntityType.weapon;
   }
 
   get isPotion() {
-    return this.type === Entity.TYPE.potion;
+    return this.type === EntityType.potion;
   }
 
   // method stub
@@ -88,13 +96,5 @@ class Entity {
     this.tile.entity = this;
   }
 }
-
-Entity.TYPE = {
-  player: 0,
-  boss: 1,
-  enemy: 2,
-  weapon: 3,
-  potion: 4,
-};
 
 export default Entity;

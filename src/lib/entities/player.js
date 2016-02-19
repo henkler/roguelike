@@ -1,16 +1,17 @@
 import MovingEntity from './movingEntity';
-import Entity from './entity';
+import { EntityType } from './entity';
 
 const DEFAULT_PLAYER_NAME = 'The Hero';
 const INITIAL_PLAYER_SIGHT = 4;
 const INITIAL_PLAYER_HEALTH = 100;
+const XP_BASE_PER_LEVEL = 25;
 
 class Player extends MovingEntity {
   constructor(game) {
     const emptyTile = game.map.getRandomEmptyTile();
     super(game,
       DEFAULT_PLAYER_NAME,
-      Entity.TYPE.player,
+      EntityType.player,
       emptyTile,
       INITIAL_PLAYER_SIGHT,
       1);
@@ -25,6 +26,13 @@ class Player extends MovingEntity {
   move(dx, dy) {
     super.move(dx, dy);
     this._markTilesExplored();
+  }
+
+  addXP(xp) {
+    this.xp += xp;
+    if (this.xp >= this.nextLevelXP) {
+      this.level++;
+    }
   }
 
   die() {
@@ -62,7 +70,7 @@ class Player extends MovingEntity {
   }
 
   get weaponName() {
-    return this._weapon ? this._weapon.name : 'Fists';
+    return this._weapon ? this._weapon.name : 'Sweaty Palms';
   }
 
   get maxDamage() {
@@ -73,7 +81,15 @@ class Player extends MovingEntity {
   }
 
   get nextLevelXP() {
-    return 0;
+    return (this.level) * XP_BASE_PER_LEVEL;
+  }
+
+  get bossXPosition() {
+    return (this._game.boss.x);
+  }
+
+  get bossYPosition() {
+    return (this._game.boss.y);
   }
 
   _interactWithEntity(entity) {

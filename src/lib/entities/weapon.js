@@ -1,9 +1,10 @@
 import Entity from './entity';
+import { EntityType } from './entity';
 
 class Weapon extends Entity {
   constructor(game, name, damage) {
     const emptyTile = game.map.getRandomEmptyTile();
-    super(game, name, Entity.TYPE.weapon, emptyTile);
+    super(game, name, EntityType.weapon, emptyTile);
 
     this._damage = damage;
   }

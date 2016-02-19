@@ -1,3 +1,8 @@
+export const TileType = {
+  wall: 0,
+  open: 1,
+};
+
 class Tile {
   constructor(x, y, type) {
     this._x = x;
@@ -21,7 +26,7 @@ class Tile {
       return '?';
     } else if (this.entity) {
       return this.entity.displayChar;
-    } else if (this.type === Tile.TYPE.wall) {
+    } else if (this.type === TileType.wall) {
       return '#';
     }
 
@@ -33,7 +38,7 @@ class Tile {
       return 'unexplored';
     } else if (this.entity) {
       return this.entity.typeName;
-    } else if (this.type === Tile.TYPE.wall) {
+    } else if (this.type === TileType.wall) {
       return 'wall';
     }
 
@@ -57,11 +62,11 @@ class Tile {
   }
 
   get isOpen() {
-    return this.type === Tile.TYPE.open;
+    return this.type === TileType.open;
   }
 
   get isWall() {
-    return this.type === Tile.TYPE.wall;
+    return this.type === TileType.wall;
   }
 
   get isExplored() {
@@ -98,10 +103,5 @@ class Tile {
     return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
   }
 }
-
-Tile.TYPE = {
-  wall: 0,
-  open: 1,
-};
 
 export default Tile;

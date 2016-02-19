@@ -1,5 +1,5 @@
 import MovingEntity from './movingEntity';
-import Entity from './entity';
+import { EntityType } from './entity';
 
 const DEFAULT_ENEMY_RANGE = 4;
 const ENEMY_BASE_HEALTH = 10;
@@ -10,7 +10,7 @@ class Enemy extends MovingEntity {
     const emptyTile = game.map.getRandomEmptyTile();
     super(game,
       name,
-      Entity.TYPE.enemy,
+      EntityType.enemy,
       emptyTile,
       DEFAULT_ENEMY_RANGE,
       level);
@@ -34,6 +34,7 @@ class Enemy extends MovingEntity {
 
   die() {
     this.tile.entity = null;
+    this._game.player.addXP(this.xp);
     this._game.storeMessage(`ATTACK: ${this.name} is now dead.`);
   }
 

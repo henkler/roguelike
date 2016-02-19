@@ -26,14 +26,22 @@ class MovingEntity extends Entity {
     }
   }
 
-  attack(entity, damage) {
-    this._game.storeMessage(`ATTACK: ${this.name} attacks ${entity.name}${this.weapon ? ' with ' + this.weapon.name : ''}`);
-    entity.handleAttack(this, damage);
+  attack(entity, damage, counterAttack = false) {
+    entity.handleAttack(this, damage, counterAttack);
   }
 
-  handleAttack(entity, damage) {
+  handleAttack(entity, damage, counterAttack = false) {
     this._game.storeMessage(`ATTACK: ${this.name} receives ${damage} points of damage from ${entity.name}`);
     this._takeDamage(damage);
+
+    if (this.isDead) {
+      return;
+    }
+
+    // counterattack when attacked, unless we've already counterattacked
+    if (!counterAttack) {
+      this.attack(entity, this.attackDamage, true);
+    }
   }
 
   // method stub
@@ -64,7 +72,7 @@ class MovingEntity extends Entity {
 
     if (this.isDead) {
       this.die();
-    } else {
+    } else if (!this.isPlayer) {
       this._game.storeMessage(`HP: ${this.name} has ${this.health} hit points remaining`);
     }
   }

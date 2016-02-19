@@ -1,11 +1,12 @@
 import Entity from './entity';
+import { EntityType } from './entity';
 
 const DEFAULT_POTION_HEALTH = 40;
 
 class Potion extends Entity {
   constructor(game) {
     const emptyTile = game.map.getRandomEmptyTile();
-    super(game, 'Health Potion', Entity.TYPE.potion, emptyTile);
+    super(game, 'Health Potion', EntityType.potion, emptyTile);
 
     this.restoresHealth = DEFAULT_POTION_HEALTH;
   }

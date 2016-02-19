@@ -13,9 +13,16 @@ import PathFinder from './entities/pathfinder';
 const DEFAULT_MAP_WIDTH = 150;
 const DEFAULT_MAP_HEIGHT = 150;
 
-const NUM_ENEMIES = 50;
-const NUM_WEAPONS = 20;
+const NUM_ENEMIES = 60;
+const NUM_WEAPONS = 30;
 const NUM_POTIONS = 30;
+
+export const GameStatus = {
+  loading: 0,
+  playing: 1,
+  win: 2,
+  lose: 3,
+};
 
 class Game {
   constructor() {
@@ -31,7 +38,7 @@ class Game {
     this._weaponList = null;
     this._potionList = null;
 
-    this._status = Game.STATUS.loading;
+    this._status = GameStatus.loading;
 
     this._init();
   }
@@ -61,6 +68,10 @@ class Game {
     return this._player;
   }
 
+  get boss() {
+    return this._boss;
+  }
+
   get pathfinder() {
     return this._pathfinder;
   }
@@ -70,7 +81,7 @@ class Game {
   }
 
   get isPlaying() {
-    return this._status === Game.STATUS.playing;
+    return this._status === GameStatus.playing;
   }
 
   // public methods
@@ -86,11 +97,11 @@ class Game {
   }
 
   playerDie() {
-    this._status = Game.STATUS.lose;
+    this._status = GameStatus.lose;
   }
 
   playerWin() {
-    this._status = Game.STATUS.win;
+    this._status = GameStatus.win;
   }
 
   // private methods
@@ -111,7 +122,7 @@ class Game {
     this._generatePotions();
     this._generateEnemies();
 
-    this._status = Game.STATUS.playing;
+    this._status = GameStatus.playing;
     this._introMessage();
 
     this.storeMessage(`${this._player.name} awakens in a strange place, naked and afraid.\n`);
@@ -151,12 +162,5 @@ class Game {
     this.storeMessage(message);
   }
 }
-
-Game.STATUS = {
-  loading: 0,
-  playing: 1,
-  win: 2,
-  lose: 3,
-};
 
 export default Game;

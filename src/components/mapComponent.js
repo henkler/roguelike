@@ -1,5 +1,6 @@
 import React from 'react';
 import TileComponent from './tileComponent';
+import { GameStatus } from '../lib/game.js';
 
 require('../styles/mapComponent.scss');
 
@@ -28,9 +29,18 @@ class MapComponent extends React.Component {
     return tiles;
   }
 
+  _renderModal() {
+    if (this.props.gameStatus === GameStatus.win) {
+      return <div className="map-modal"><h1>You Win!</h1></div>;
+    } else if (this.props.gameStatus === GameStatus.lose) {
+      return <div className="map-modal"><h1>Game Over!</h1></div>;
+    }
+  }
+
   render() {
     return (
       <div className="map">
+        {this._renderModal()}
         {this._renderMapTiles()}
       </div>
     );

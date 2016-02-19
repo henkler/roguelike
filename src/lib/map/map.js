@@ -1,5 +1,6 @@
 import Tile from './tile';
-import Entity from '../entities/entity';
+import { TileType } from './tile';
+import { EntityType } from '../entities/entity';
 
 const GENERATOR_WALL_PERCENTAGE = 40;
 const GENERATOR_ITERATIONS = 4;
@@ -34,7 +35,7 @@ class Map {
   }
 
   _randomFillMap() {
-    let tiles = new Array(this.width);
+    const tiles = new Array(this.width);
 
     for (let i = 0; i < this.width; i++) {
       tiles[i] = new Array(this.height);
@@ -47,7 +48,7 @@ class Map {
           isWall = true;
         }
 
-        tiles[i][j] = new Tile(i, j, isWall ? Tile.TYPE.wall : Tile.TYPE.open);
+        tiles[i][j] = new Tile(i, j, isWall ? TileType.wall : TileType.open);
       }
     }
 
@@ -55,7 +56,7 @@ class Map {
   }
 
   _permuteMapIteration(r1Threshold, r2Threshold) {
-    let nextPermutation = new Array(this.width);
+    const nextPermutation = new Array(this.width);
 
     for (let i = 0; i < this.width; i++) {
       nextPermutation[i] = new Array(this.height);
@@ -68,12 +69,12 @@ class Map {
 
         // if the walls surrounding the tile is bigger than the radius of 1 threshold, make a wall
         if (r1 >= r1Threshold) {
-          tileType = Tile.TYPE.wall;
+          tileType = TileType.wall;
         } else if (r2Threshold && r2 <= r2Threshold) {
           // if the walls surrounding the tile is less than the radius of 2 threshold, make a wall
-          tileType = Tile.TYPE.wall;
+          tileType = TileType.wall;
         } else {
-          tileType = Tile.TYPE.open;
+          tileType = TileType.open;
         }
 
         nextPermutation[i][j] = tileType;
@@ -168,20 +169,20 @@ class Map {
       for (let i = 0; i < this.width; i++) {
         const type = this._tiles[i][j].type;
         const entity = this._tiles[i][j].entity;
-        if (type === Tile.TYPE.wall) {
+        if (type === TileType.wall) {
           mapString += '#';
         }
-        if (type === Tile.TYPE.open) {
+        if (type === TileType.open) {
           if (entity) {
-            if (entity.type === Entity.TYPE.player) {
+            if (entity.type === EntityType.player) {
               mapString += '@';
-            } else if (entity.type === Entity.TYPE.enemy) {
+            } else if (entity.type === EntityType.enemy) {
               mapString += '?';
-            } else if (entity.type === Entity.TYPE.boss) {
+            } else if (entity.type === EntityType.boss) {
               mapString += '!';
-            } else if (entity.type === Entity.TYPE.weapon) {
+            } else if (entity.type === EntityType.weapon) {
               mapString += '$';
-            } else if (entity.type === Entity.TYPE.potion) {
+            } else if (entity.type === EntityType.potion) {
               mapString += '*';
             } else {
               mapString += 'x';
