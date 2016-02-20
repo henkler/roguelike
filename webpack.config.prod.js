@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer = require('autoprefixer');
+
 
 module.exports = {
   entry: ['./src/app'],
@@ -28,10 +30,13 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass'],
+        loaders: ['style', 'css', 'postcss', 'sass'],
       },
     ],
   },
+  postcss: [
+    autoprefixer({ browsers: ['last 2 versions'] }),
+  ],
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM',
