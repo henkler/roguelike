@@ -16,7 +16,7 @@ class MessageLogger {
 
   _updateMessageString() {
     let newMessageString = '';
-    this._messages.forEach((message) => newMessageString += `${message}\n`);
+    this._messages.forEach((message) => { newMessageString += `${message}\n`; });
     this._messageString = newMessageString;
   }
 }

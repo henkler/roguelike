@@ -31,6 +31,7 @@ class MovingEntity extends Entity {
   }
 
   handleAttack(entity, damage, counterAttack = false) {
+    // eslint-disable-next-line max-len
     this._game.storeMessage(`ATTACK: ${this.name} receives ${damage} points of damage from ${entity.name}`);
     this._takeDamage(damage);
 

@@ -6,6 +6,7 @@ class PathFinder {
   constructor(game) {
     this._game = game;
 
+    // eslint-disable-next-line new-cap
     const easystar = new EasyStar.js();
     easystar.setGrid(this._getGridForEasystar());
     easystar.setAcceptableTiles([TileType.open]);

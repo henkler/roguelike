@@ -1,5 +1,4 @@
-import Entity from './entity';
-import { EntityType } from './entity';
+import Entity, { EntityType } from './entity';
 
 class Weapon extends Entity {
   constructor(game, name, damage) {

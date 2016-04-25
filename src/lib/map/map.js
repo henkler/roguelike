@@ -1,5 +1,4 @@
-import Tile from './tile';
-import { TileType } from './tile';
+import Tile, { TileType } from './tile';
 import { EntityType } from '../entities/entity';
 
 const GENERATOR_WALL_PERCENTAGE = 40;

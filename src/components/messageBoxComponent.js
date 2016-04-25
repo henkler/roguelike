@@ -3,10 +3,6 @@ import React from 'react';
 require('../styles/messageBoxComponent.scss');
 
 class MessageBoxComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillUpdate() {
     const textArea = this.refs.message_text_area;
     this._shouldScrollBottom = textArea.scrollTop + textArea.offsetHeight === textArea.scrollHeight;

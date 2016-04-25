@@ -6,9 +6,9 @@ This project is a simple javascript recreation of a standard roguelike game.
 
 ### React
 
-This user interface is written 100% in React.
+This user interface is written 100% in React 15.0
 
-### ES2015
+### ES6
 
 The latest Javascript syntax (including modules) are used.  Entities are defined as classes, and inheritance is used for player, enemy, and boss objects.
 

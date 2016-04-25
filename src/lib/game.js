@@ -158,6 +158,7 @@ class Game {
 
     message += '\n';
     message += 'https://github.com/henkler/roguelike\n';
+    // eslint-disable-next-line max-len
     message += '<<explore, collect weapons, collect potions, avoid/kill enemies, level up, kill the boss>>\n';
 
     this.storeMessage(message);

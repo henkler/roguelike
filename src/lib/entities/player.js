@@ -36,6 +36,7 @@ class Player extends MovingEntity {
   }
 
   die() {
+    // eslint-disable-next-line max-len
     this._game.storeMessage(`\n${this.name} falls to the ground.\nYou realize that evil will always triumph because good is dumb.\nFade to black.`);
     this._game.playerDie();
   }
@@ -43,14 +44,17 @@ class Player extends MovingEntity {
   pickupWeapon(newWeapon) {
     if (!this._weapon || newWeapon.damage > this._weapon.damage) {
       this._weapon = newWeapon;
+      // eslint-disable-next-line max-len
       this._game.storeMessage(`WEAPON: Equipping \'${newWeapon.name}\' with base damage ${newWeapon.damage}`);
     } else {
+      // eslint-disable-next-line max-len
       this._game.storeMessage(`WEAPON: The weapon \'${newWeapon.name}\' is worse than your current weapon.  It is hurled into the bushes`);
     }
   }
 
   pickupPotion(potion) {
     this.health += potion.restoresHealth;
+    // eslint-disable-next-line max-len
     this._game.storeMessage(`HEALTH: Found a ${potion.name}.  Restored ${potion.restoresHealth} health!`);
   }
 

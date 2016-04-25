@@ -5,10 +5,6 @@ import { GameStatus } from '../lib/game.js';
 require('../styles/mapComponent.scss');
 
 class MapComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   _renderMapTiles() {
     const tiles = [];
     const vp = this.props.viewport;
@@ -35,6 +31,8 @@ class MapComponent extends React.Component {
     } else if (this.props.gameStatus === GameStatus.lose) {
       return <div className="map-modal"><h1>Game Over!</h1></div>;
     }
+
+    return null;
   }
 
   render() {
